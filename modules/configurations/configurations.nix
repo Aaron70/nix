@@ -5,8 +5,7 @@ with lib;
   flake.nixosModules.configurations = { config, pkgs, ... }: {
     imports = [ 
       self.nixosModules.profile
-      # self.nixosModules.desktop
-      self.nixosModules.terminal
+      self.nixosModules.desktop
     ];
 
     options.preferences = {
@@ -23,8 +22,8 @@ with lib;
       nixpkgs.config.allowBroken = true;
 
         # TODO: Remove this 
-        services.displayManager.gdm.enable = true;
-        services.desktopManager.gnome.enable = true;
+        # services.displayManager.gdm.enable = true;
+        # services.desktopManager.gnome.enable = true;
 
         # To disable installing GNOME's suite of applications
         # and only be left with GNOME shell.

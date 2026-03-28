@@ -11,7 +11,7 @@ with lib;
     config = {
       configuration = ''
         theme=${config.configurations.theme.path}
-        command=${getExe config.configurations.shellPackage}
+        command=${getExe config.configurations.shell}
       '';
     };
   };
