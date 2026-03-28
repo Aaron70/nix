@@ -214,7 +214,7 @@
         "transient_prompt": {
           "foreground": "${colors.base0D}",
           "background": "transparent",
-          "template": "󱚡 "
+          "template": "󱚡  "
         },
         "secondary_prompt": {
           "foreground": "${colors.base0D}",

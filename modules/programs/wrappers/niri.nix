@@ -240,7 +240,7 @@ with lib;
         
           Mod+Shift+E { quit; }
           Mod+Shift+Slash { show-hotkey-overlay; }
-          Mod+Space repeat=false hotkey-overlay-title="Open a Terminal: ghostty" { spawn "ghostty"; }
+          Mod+Space repeat=false hotkey-overlay-title="Open a Terminal" { spawn "${terminal}"; }
           Mod+X repeat=false hotkey-overlay-title="Closes the focused window" { close-window; }
           Mod+D hotkey-overlay-title="Run an Application: fuzzel" { spawn "fuzzel"; }
       
