@@ -5,7 +5,7 @@ let
   desktop = "niri";
 in {
 
-  flake.nixosModules.desktop = { pkgs, config, ... }: {
+  flake.nixosModules.desktop = { pkgs, ... }: {
     imports = [
       self.modules.generic.desktop
       self.nixosModules.terminal
@@ -18,8 +18,6 @@ in {
         inherit pkgs; 
       };
     };
-
-    environment.systemPackages = config.configurations.packages;
   };
 
   flake.wrappers.desktop = { ... }: {

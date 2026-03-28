@@ -11,7 +11,8 @@ with lib;
     config = {
       configuration = ''
         include ${config.configurations.theme.path}
-        confirm_os_window_close -1
+        confirm_os_window_close 0 
+        enable_audio_bell false
 
         shell ${getExe config.configurations.shell}
       '';
