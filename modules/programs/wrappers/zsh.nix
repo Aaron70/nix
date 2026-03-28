@@ -172,7 +172,6 @@ with lib;
           BLUE='\033[0;34m'
           NOCOLOR='\033[0m'
           count=$(fd . /nix/store --max-results 21 | wc -l)
-          echo $count
           if [ "$count" -le 20 ]; then
             echo "''${BLUE}  ''${NOCOLOR}files at ''${BLUE}$(pwd)''${NOCOLOR}:"
             ls

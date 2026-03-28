@@ -2,7 +2,7 @@
 
 with lib;
 let
-  terminal = "ghostty";
+  terminal = "kitty";
 in {
 
   flake.nixosModules.terminal = { pkgs, ... }: {
@@ -23,7 +23,7 @@ in {
 
   flake.modules.generic.terminal = { pkgs, ... }: {
     options.configurations = {
-      shellPackage = mkOption {
+      shell = mkOption {
         type = types.package;
         description = "The wrapped and configured shell package.";
       };
@@ -41,11 +41,12 @@ in {
     };
 
     config.configurations = {
-      shellPackage = self.wrappers.shell.wrap { inherit pkgs; };
+      shell = self.wrappers.shell.wrap { inherit pkgs; };
 
       theme = rec {
         package = pkgs.vimPlugins.tokyonight-nvim;
-        path = "${package}/extras/ghostty/tokyonight_moon";
+        path = "${package}/extras/kitty/tokyonight_moon.conf";
+        # path = "${package}/extras/ghostty/tokyonight_moon";
       };
     };
   };
