@@ -18,6 +18,7 @@ with self.lib;
       PROFILE = config.profile.user.username;
     };
     environment.systemPackages = with pkgs; [
+      kitty
       hello
     ];
   });

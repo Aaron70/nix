@@ -5,6 +5,8 @@ with lib;
   flake.nixosModules.configurations = { config, pkgs, ... }: {
     imports = [ 
       self.nixosModules.profile
+      # self.nixosModules.desktop
+      self.nixosModules.terminal
     ];
 
     options.preferences = {
@@ -26,11 +28,11 @@ with lib;
 
         # To disable installing GNOME's suite of applications
         # and only be left with GNOME shell.
-        services.gnome.core-apps.enable = false;
-        services.gnome.core-developer-tools.enable = false;
-        services.gnome.games.enable = false;
-        environment.gnome.excludePackages = with pkgs; [ gnome-tour gnome-user-docs ];
-        environment.systemPackages = with pkgs; [ kitty ];
+        # services.gnome.core-apps.enable = false;
+        # services.gnome.core-developer-tools.enable = false;
+        # services.gnome.games.enable = false;
+        # environment.gnome.excludePackages = with pkgs; [ gnome-tour gnome-user-docs ];
+        # environment.systemPackages = with pkgs; [ kitty ];
                
       services.xserver.videoDrivers = [ "nvidia" ];
       hardware = {
