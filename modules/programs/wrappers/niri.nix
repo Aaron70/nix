@@ -21,7 +21,7 @@ with lib;
       "config.kdl".content = let
         terminal = getExe config.configurations.terminal;
         appLauncher = getExe config.configurations.appLauncher;
-        browser = "zen";
+        browser = getExe config.configurations.browser;
         host = "aaronv";
       in
       ''
