@@ -26,20 +26,10 @@ in {
     };
   };
 
-  flake.wrappers.desktop = { pkgs, ... }: {
+  flake.wrappers.desktop = { ... }: {
     imports = [
       self.wrapperModules.${desktop}
     ];
-
-    config = let
-      fontsConfig = pkgs.makeFontsConf {
-        fontDirectories = with pkgs; [
-          nerd-fonts.jetbrains-mono
-        ];
-      };
-    in {
-      env.FONTCONFIG_FILE="${fontsConfig}";
-    };
   };
 
   flake.modules.generic.desktop = { pkgs, ... }: {
@@ -64,16 +54,15 @@ in {
         description = "An list of packages to install.";
       };
 
-      fonts = mkOption {
-        type = types.listOf types.package;
-        description = "An of fonts to install.";
+      fontsConfig = mkOption {
+        type = types.package;
+        description = "The package with the font configurations. Export FONTCONFIG_FILE=\${fontsConfig} to apply the fonts.";
       };
     };
 
     config.configurations = rec {
       terminal = self.wrappers.terminal.wrap { inherit pkgs; };
       desktopShell = self.wrappers.noctalia.wrap { inherit pkgs; };
-      # appLauncher = pkgs.fuzzel;
       appLauncher = (pkgs.writeShellScriptBin "launcher" "${getExe desktopShell} ipc call launcher toggle");
 
       packages = [
@@ -81,6 +70,12 @@ in {
         desktopShell
         appLauncher
       ];
+
+      fontsConfig = pkgs.makeFontsConf {
+        fontDirectories = with pkgs; [
+          nerd-fonts.jetbrains-mono
+        ];
+      };
     };
   };
 }

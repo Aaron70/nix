@@ -16,6 +16,8 @@ with lib;
         xwayland-satellite
       ] ++ config.configurations.packages;
 
+      env.FONTCONFIG_FILE="${config.configurations.fontsConfig}";
+
       "config.kdl".content = let
         terminal = getExe config.configurations.terminal;
         appLauncher = getExe config.configurations.appLauncher;
