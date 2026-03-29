@@ -1,4 +1,4 @@
-{ self, lib, ... }: 
+{ inputs, self, lib, ... }: 
 
 with lib;
 let
@@ -23,6 +23,11 @@ in {
           inherit pkgs; 
         };
       };
+
+      environment.systemPackages = with pkgs; [
+        spotify
+        discord
+      ];
     };
   };
 
@@ -37,6 +42,11 @@ in {
       terminal = mkOption {
         type = types.package;
         description = "The wrapped and configured terminal package.";
+      };
+
+      browser = mkOption {
+        type = types.package;
+        description = "The wrapped and configured browser package.";
       };
 
       desktopShell = mkOption {
@@ -62,11 +72,13 @@ in {
 
     config.configurations = rec {
       terminal = self.wrappers.terminal.wrap { inherit pkgs; };
+      browser = inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default;
       desktopShell = self.wrappers.noctalia.wrap { inherit pkgs; };
       appLauncher = (pkgs.writeShellScriptBin "launcher" "${getExe desktopShell} ipc call launcher toggle");
 
-      packages = [
+      packages = with pkgs; [
         terminal
+        browser
         desktopShell
         appLauncher
       ];
