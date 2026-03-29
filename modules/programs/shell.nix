@@ -79,6 +79,7 @@ in {
         fzf
         gcc
         lazygit
+        nh
 
         # Wrapped
         config.configurations.gitPackage

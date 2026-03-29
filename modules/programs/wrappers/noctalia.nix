@@ -6,8 +6,22 @@
   {
     imports = [ wlib.wrapperModules.noctalia-shell ];
     
-    config = {
+    config = let
+      noctalia-plugins = pkgs.fetchgit {
+        url = "https://github.com/noctalia-dev/noctalia-plugins";
+        rev = "e56dcb6b4c7a680282d0279076a82754397d1fd5";
+        sha256 = "sha256-TNwt8BkZSmI62BwBgNdKaOiWX8ePyrJsxsPCcF4z660=";
+        sparseCheckout = [
+          "privacy-indicator"
+          "screen-recorder"
+          "screen-toolkit"
+        ];
+      };
+    in {
       extraPackages = with pkgs; [ 
+        # Dependencies for Screen Recorder plugin: https://noctalia.dev/plugins/screen-recorder/
+        gpu-screen-recorder
+
         # Dependencies for Screen Toolkit plugin: https://noctalia.dev/plugins/screen-toolkit/
         grim 
         slurp
@@ -21,6 +35,92 @@
         ffmpeg
         gifski
       ];
+      colors = {
+        mError = "#f7768e";
+        mHover = "#9ece6a";
+        mOnError = "#16161e";
+        mOnHover = "#16161e";
+        mOnPrimary = "#16161e";
+        mOnSecondary = "#16161e";
+        mOnSurface = "#c0caf5";
+        mOnSurfaceVariant = "#9aa5ce";
+        mOnTertiary = "#16161e";
+        mOutline = "#565f89";
+        mPrimary = "#7aa2f7";
+        mSecondary = "#bb9af7";
+        mShadow = "#15161e";
+        mSurface = "#1a1b26";
+        mSurfaceVariant = "#24283b";
+        mTertiary = "#9ece6a";
+      };
+      preInstalledPlugins = {
+        privacy-indicator = {
+          enabled = true;
+          sourceUrl = "https://github.com/noctalia-dev/noctalia-plugins";
+          src = "${noctalia-plugins}/privacy-indicator";
+        };
+        screen-recorder = {
+          enabled = true;
+          sourceUrl = "https://github.com/noctalia-dev/noctalia-plugins";
+          src = "${noctalia-plugins}/screen-recorder";
+        };
+        screen-toolkit = {
+          enabled = true;
+          sourceUrl = "https://github.com/noctalia-dev/noctalia-plugins";
+          src = "${noctalia-plugins}/screen-toolkit";
+        };
+      };
+      pluginSettings = {
+        privacy-indicator = {
+          hideInactive = true;
+          enableToast = true;
+          removeMargins = false;
+          iconSpacing = 4;
+          activeColor = "error";
+          inactiveColor = "none";
+          micFilterRegex = "";
+        };
+        screen-recorder = {
+          hideInactive = true;
+          iconColor = "error";
+          directory = "";
+          filenamePattern = "recording_yyyyMMdd_HHmmss";
+          frameRate = "60";
+          audioCodec = "opus";
+          videoCodec = "h264";
+          quality = "very_high";
+          colorRange = "limited";
+          showCursor = true;
+          copyToClipboard = false;
+          audioSource = "default_output";
+          videoSource = "portal";
+          resolution = "original";
+          replayEnabled = false;
+          replayDuration = "30";
+          customReplayDuration = "30";
+          replayStorage = "ram";
+          restorePortalSession = false;
+          customFrameRate = "60";
+        };
+        screen-toolkit = {
+          colorHistory = [ ];
+          paletteColors = [ ];
+          installedLangs = [
+            "eng"
+            "spa"
+          ];
+          transAvailable = false;
+          selectedOcrLang = "eng";
+          stateIsRunning = false;
+          stateActiveTool = "";
+          stateMirrorVisible = false;
+          resultHex = "";
+          resultRgb = "";
+          resultHsv = "";
+          resultHsl = "";
+          colorCapturePath = "";
+        };
+      };
       settings = {
         settingsVersion = 59;
         bar = {
@@ -86,7 +186,7 @@
                 defaultSettings = {
                   activeColor = "primary";
                   enableToast = true;
-                  hideInactive = false;
+                  hideInactive = true;
                   iconSpacing = 4;
                   inactiveColor = "none";
                   micFilterRegex = "";
@@ -158,7 +258,7 @@
                   directory = "";
                   filenamePattern = "recording_yyyyMMdd_HHmmss";
                   frameRate = "60";
-                  hideInactive = false;
+                  hideInactive = true;
                   iconColor = "none";
                   quality = "very_high";
                   replayDuration = "30";
@@ -414,6 +514,7 @@
                   colorHistory = [ ];
                   installedLangs = [
                     "eng"
+                    "spa"
                   ];
                   paletteColors = [ ];
                   selectedOcrLang = "eng";
