@@ -149,13 +149,28 @@
                 unreadBadgeColor = "primary";
               }
               {
-                id = "plugin:privacy-indicator";
-              }
-              {
+                defaultSettings = {
+                  audioCodec = "opus";
+                  audioSource = "default_output";
+                  colorRange = "limited";
+                  copyToClipboard = false;
+                  customReplayDuration = "30";
+                  directory = "";
+                  filenamePattern = "recording_yyyyMMdd_HHmmss";
+                  frameRate = "60";
+                  hideInactive = false;
+                  iconColor = "none";
+                  quality = "very_high";
+                  replayDuration = "30";
+                  replayEnabled = false;
+                  replayStorage = "ram";
+                  resolution = "original";
+                  restorePortalSession = false;
+                  showCursor = true;
+                  videoCodec = "h264";
+                  videoSource = "portal";
+                };
                 id = "plugin:screen-recorder";
-              }
-              {
-                id = "plugin:screen-toolkit";
               }
             ];
           };
@@ -281,7 +296,7 @@
         wallpaper = {
           enabled = true;
           overviewEnabled = true;
-          directory = "${self.lib.resourcesPath}/wallpapers";
+          directory = "/home/aaronv/Pictures/Wallpapers";
           monitorDirectories = [ ];
           enableMultiMonitorDirectories = false;
           showHiddenFiles = false;
@@ -357,22 +372,16 @@
           shortcuts = {
             left = [
               {
-                id = "Network";
-              }
-              {
-                id = "Bluetooth";
-              }
-              {
                 id = "WallpaperSelector";
               }
-            ];
-            right = [
               {
-                id = "Notifications";
+                id = "NoctaliaPerformance";
               }
               {
                 id = "KeepAwake";
               }
+            ];
+            right = [
               {
                 id = "NightLight";
               }
@@ -399,6 +408,18 @@
                   videoSource = "portal";
                 };
                 id = "plugin:screen-recorder";
+              }
+              {
+                defaultSettings = {
+                  colorHistory = [ ];
+                  installedLangs = [
+                    "eng"
+                  ];
+                  paletteColors = [ ];
+                  selectedOcrLang = "eng";
+                  transAvailable = false;
+                };
+                id = "plugin:screen-toolkit";
               }
             ];
           };
