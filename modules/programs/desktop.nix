@@ -20,14 +20,14 @@ in {
       programs.${desktop} = {
         enable = true;
         package = self.wrappers.desktop.wrap { 
-          inherit pkgs; 
+          inherit pkgs;
         };
       };
 
       environment.systemPackages = with pkgs; [
         spotify
         discord
-      ];
+      ] ++ config.configurations.packages;
     };
   };
 
@@ -76,7 +76,7 @@ in {
       desktopShell = self.wrappers.noctalia.wrap { inherit pkgs; };
       appLauncher = (pkgs.writeShellScriptBin "launcher" "${getExe desktopShell} ipc call launcher toggle");
 
-      packages = with pkgs; [
+      packages = [
         terminal
         browser
         desktopShell

@@ -5,7 +5,7 @@ let
   shell = "zsh";
 in {
 
-  flake.nixosModules.shell = { pkgs, ... }: {
+  flake.nixosModules.shell = { pkgs, config, ... }: {
     config = let 
       shellPackage = self.wrappers.shell.wrap { inherit pkgs; };
     in {
@@ -19,7 +19,7 @@ in {
 
       environment.systemPackages = [
         shellPackage
-      ];
+      ] ++ config.configurations.packages;
     };
   };
 
