@@ -54,11 +54,20 @@ in {
         type = types.package;
         description = "The wrapped and configured git package.";
       };
+
+      multiplexer = mkOption {
+        type = types.package;
+        description = "The wrapped and configured terminal multiplexer.";
+      }; 
     };
 
     config.configurations = {
       shellPrompt = self.wrappers.oh-my-posh.wrap { inherit pkgs; };
       gitPackage = self.wrappers.git.wrap { inherit pkgs; };
+      multiplexer = let shellPath = getExe config.package; in (self.wrappers.tmux.wrap { 
+        inherit pkgs; 
+        shell = shellPath;
+      });
 
       shellAliases = {
         lg = "lazygit";
@@ -82,6 +91,7 @@ in {
 
         # Wrapped
         config.configurations.gitPackage
+        config.configurations.multiplexer
       ];
     };
   };

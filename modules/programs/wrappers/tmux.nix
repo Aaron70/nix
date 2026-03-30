@@ -1,0 +1,47 @@
+{ self, lib, ... }: 
+
+with lib; { 
+  flake.wrappers.tmux = { wlib, pkgs, config, ... }:
+  {
+    imports = [ 
+      wlib.wrapperModules.tmux 
+      self.wrapperHelpers.modules.theme
+    ];
+
+    config = let
+      colors = config.colors;
+    in {
+      prefix = "C-space";
+      modeKeys = "vi";
+      vimVisualKeys = true;
+      plugins = with pkgs; [
+        tmuxPlugins.sensible
+        tmuxPlugins.resurrect
+        tmuxPlugins.yank
+      ];
+      terminal = "tmux-256color";
+      terminalOverrides = ",xterm-256color:Tc";
+      configBefore = ''
+        set -g renumber-windows on  # keep numbering sequential
+        set -g focus-events on      # Enable focus events for vim autoread
+
+        # Better pane splitting (and keep current path)
+        bind | split-window -h -c "#{pane_current_path}"
+        bind - split-window -v -c "#{pane_current_path}"
+        bind c new-window -c "#{pane_current_path}"
+
+        # Vim-style pane navigation
+        bind h select-pane -L
+        bind j select-pane -D
+        bind k select-pane -U
+        bind l select-pane -R
+        
+        # Vim-style pane resizing
+        bind -r H resize-pane -L 5
+        bind -r J resize-pane -D 5
+        bind -r K resize-pane -U 5
+        bind -r L resize-pane -R 5
+      '';
+    };
+  };
+}
