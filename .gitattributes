@@ -1,1 +1,2 @@
-secrets.yaml filter=git-crypt diff==git-crypt
+modules/profiles/* filter=git-crypt diff=git-crypt
+modules/profiles/default.nix !filter !diff
