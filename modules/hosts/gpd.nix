@@ -5,9 +5,7 @@ let
 in {
   flake.nixosConfigurations.${host} = inputs.nixpkgs.lib.nixosSystem {
     modules = [ self.nixosModules.${host} ];
-  };
 
-  flake.nixosModules.${host} = { ... }: {
     config = {
       information = {
         isLaptop = true;
