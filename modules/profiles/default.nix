@@ -29,13 +29,6 @@ with lib;
     flake.profile.module = { ... }: {
       imports = builtins.attrValues self.profiles.generic;
 
-      options.preferences = {
-        profile = mkOption {
-          type = types.str;
-          description = "The name of the profile to use";
-        };
-      };
-
       options.profile = {
         user = {
           username = mkOption {
