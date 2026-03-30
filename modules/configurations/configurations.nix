@@ -4,35 +4,22 @@ with lib;
 {
   flake.nixosModules.configurations = { config, pkgs, ... }: {
     imports = [ 
+      self.nixosModules.host
       self.nixosModules.profile
       self.nixosModules.desktop
     ];
-
-    options.preferences = {
-      stateVersion = mkOption {
-        type = types.str;
-        description = "The state version to be used on `system.stateVersion` and `home.stateVersion` options";
-        default = "25.11";
-      };
-    };
 
     config = {
       nix.settings.experimental-features = [ "nix-command" "flakes" ];
       nixpkgs.config.allowUnfree = true;
       nixpkgs.config.allowBroken = true;
 
-        # TODO: Remove this 
-        # services.displayManager.gdm.enable = true;
-        # services.desktopManager.gnome.enable = true;
+      boot.loader.systemd-boot = {
+        enable = mkDefault true;
+        configurationLimit = mkDefault config.preferences.boot.configurationLimit;
+      };
+      boot.loader.efi.canTouchEfiVariables = true;
 
-        # To disable installing GNOME's suite of applications
-        # and only be left with GNOME shell.
-        # services.gnome.core-apps.enable = false;
-        # services.gnome.core-developer-tools.enable = false;
-        # services.gnome.games.enable = false;
-        # environment.gnome.excludePackages = with pkgs; [ gnome-tour gnome-user-docs ];
-        # environment.systemPackages = with pkgs; [ kitty ];
-               
       services.xserver.videoDrivers = [ "nvidia" ];
       hardware = {
         graphics = {
@@ -63,8 +50,21 @@ with lib;
         # jack.enable = true;
       };
 
+
+      services.blueman.enable = true;
+
+      hardware.bluetooth = {
+        enable = true;
+        powerOnBoot = true;
+        settings = {
+          General = {
+            Experimental = true;
+          };
+        };
+      };
+
       networking.networkmanager.enable = true;
-      networking.hostName = "test"; #TODO: Change this for the profile username
+      networking.hostName = config.profile.user.username;
       # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
       time.timeZone = mkDefault "America/Costa_Rica";

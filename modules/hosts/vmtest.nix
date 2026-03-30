@@ -11,22 +11,11 @@
       "${modulesPath}/virtualisation/qemu-vm.nix" 
     ];
 
-    users.users.vmtest = {
-      isNormalUser = true;
-      initialPassword = "test";
-      group = "vmtest";
-    };
-    users.groups.vmtest = {};
-
     preferences = {
       profile = "vmtest";
 
       desktop.enable = true;
     };
-
-
-    boot.loader.systemd-boot.enable = true;
-    boot.loader.efi.canTouchEfiVariables = true;
 
     virtualisation.graphics = true;
     virtualisation.qemu.options = [

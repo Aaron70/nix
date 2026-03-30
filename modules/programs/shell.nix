@@ -14,8 +14,7 @@ in {
       environment.pathsToLink = [ "/share/${shell}" ];
 
       users.defaultUserShell = shellPackage;
-      # TODO: Uncomment this when profiles are implemented
-      # users.users.${username}.shell = config.shell.package;
+      users.users.${config.profile.user.username}.shell = shellPackage;
 
       environment.systemPackages = [
         shellPackage
