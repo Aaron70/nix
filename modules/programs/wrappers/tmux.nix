@@ -53,6 +53,12 @@ with lib; {
         
         set -g window-status-current-style "#{?window_zoomed_flag,fg=yellow,fg=${colors.base0D}\#,nobold}"
         set -g window-status-bell-style "fg=red,nobold"
+
+        bind-key x kill-pane # skip "kill-pane 1? (y/n)" prompt
+        set -g detach-on-destroy off  # don't exit from tmux when closing a session
+
+        # bind-key -r f run-shell "sesh connect $({ sesh list & hydrate-paths; wait; } | tv)"
+        bind-key -r l run-shell "toggle-tmux-popup"
       '';
     };
   };
