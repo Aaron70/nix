@@ -106,6 +106,7 @@ in {
         (writeShellScriptBin "custom-fzf-preview" (readFile ./scripts/custom-fzf-preview.sh))
         (writeShellScriptBin "cdfzf" (readFile ./scripts/cdfzf.sh))
         (writeShellScriptBin "toggle-tmux-popup" (readFile ./scripts/toogle-tmux-popup.sh))
+        (writeShellScriptBin "sessions" (readFile ./scripts/sessions.sh))
       ];
     };
   };
