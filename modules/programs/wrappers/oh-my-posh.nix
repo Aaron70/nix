@@ -13,7 +13,7 @@ with lib;
       extraPackages = with pkgs; [
         nerd-fonts.jetbrains-mono
       ];
-      configuration = self.wrapperHelpers.oh-my-posh.prompts.robots { inherit colors; };
+      configuration = self.wrapperHelpers.oh-my-posh.prompts.custom { inherit colors; };
     };
   };
  }
