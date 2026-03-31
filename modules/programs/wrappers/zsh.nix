@@ -173,10 +173,10 @@ with lib;
           NOCOLOR='\033[0m'
           count=$(fd -d 1 --max-results 26 | wc -l)
           if [ $count -le 25 ]; then
-            echo "''${BLUE}  ''${NOCOLOR}files at ''${BLUE}$(pwd)''${NOCOLOR}:"
+            echo " ''${BLUE}  ''${NOCOLOR}files at ''${BLUE}$(pwd)''${NOCOLOR}:"
             ls
           else
-            echo "''${BLUE}  ''${NOCOLOR}there are more than 25 files at ''${BLUE}$(pwd)''${NOCOLOR}"
+            echo " ''${BLUE}  ''${NOCOLOR}there are more than 25 files at ''${BLUE}$(pwd)''${NOCOLOR}"
           fi
         }
         

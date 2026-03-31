@@ -74,6 +74,7 @@ in {
         eza = "eza --icons auto --git --group-directories-last";
         ls = "eza";
         find = "fd";
+        cd = ". cdfzf";
       };
 
       envVariables = {
@@ -82,16 +83,29 @@ in {
 
       packages = with pkgs; [
         # Dependencies
+        chafa
         eza
         fd
+        file
         fzf
         gcc
+        imgcat
         lazygit
         nh
+        ripgrep
+        sesh
+        television
+        zoxide
 
         # Wrapped
         config.configurations.gitPackage
         config.configurations.multiplexer
+
+        # Scripts
+        (writeShellScriptBin "hydrate-paths" (readFile ./scripts/hydrate-paths.sh))
+        (writeShellScriptBin "custom-fzf-preview" (readFile ./scripts/custom-fzf-preview.sh))
+        (writeShellScriptBin "cdfzf" (readFile ./scripts/cdfzf.sh))
+        (writeShellScriptBin "toggle-tmux-popup" (readFile ./scripts/toogle-tmux-popup.sh))
       ];
     };
   };
