@@ -41,6 +41,18 @@ with lib; {
         bind -r J resize-pane -D 5
         bind -r K resize-pane -U 5
         bind -r L resize-pane -R 5
+
+        # Theme: status
+        set -g status-style bg=${colors.base00},fg=${colors.base03},bright
+        set -g status-left " "
+        set -g status-right "#[fg=orange,bright]#S "
+        
+        # Theme: status (windows)
+        set -g window-status-format "●"
+        set -g window-status-current-format "●"
+        
+        set -g window-status-current-style "#{?window_zoomed_flag,fg=yellow,fg=${colors.base0D}\#,nobold}"
+        set -g window-status-bell-style "fg=red,nobold"
       '';
     };
   };
