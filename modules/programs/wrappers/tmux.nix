@@ -57,8 +57,10 @@ with lib; {
         bind-key x kill-pane # skip "kill-pane 1? (y/n)" prompt
         set -g detach-on-destroy off  # don't exit from tmux when closing a session
 
-        # bind-key -r f run-shell "sesh connect $({ sesh list & hydrate-paths; wait; } | tv)"
+        bind-key -r f run-shell "sessions"
         bind-key -r l run-shell "toggle-tmux-popup"
+        bind-key -r g run-shell 'tmux popup -E -d "#{pane_current_path}" -w "90%" -h "90%" -T "LazyGit" "lazygit"'
+
       '';
     };
   };
