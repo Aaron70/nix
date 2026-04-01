@@ -19,3 +19,9 @@ git-crypt unlock /path/to/key
 git-crypt lock
 ```
 
+## Troubleshooting
+
+### No audio on headsets
+
+Open `pavucontrol` or `Bluetooth Manager` and change the audio profile. Currently is working with `High Fidelity Playback (A2DP Sink, codec AAC)`.
+
