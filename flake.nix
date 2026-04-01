@@ -12,6 +12,8 @@
     wrappers.inputs.nixpkgs.follows = "nixpkgs";
     import-tree.url = "github:vic/import-tree";
 
+    nvim.url = "github:aaron70/nvim";
+
     zen-browser.url = "github:youwen5/zen-browser-flake";
     zen-browser.inputs.nixpkgs.follows = "nixpkgs";
   };
