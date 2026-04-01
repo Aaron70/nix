@@ -15,10 +15,10 @@ with lib;
 
       extraPackages = [
         # Zsh
-        zsh-autosuggestions
-        zsh-syntax-highlighting 
-        zsh-history-substring-search
-        zsh-fzf-tab 
+        # zsh-autosuggestions
+        # zsh-syntax-highlighting 
+        # zsh-history-substring-search
+        # zsh-fzf-tab 
 
         #wrapped
         config.configurations.shellPrompt
@@ -92,6 +92,28 @@ with lib;
         zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
         zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
         zstyle ':fzf-tab:*' use-fzf-default-opts yes
+
+        # ==============================
+        # vi Mode
+        # ==============================
+
+        bindkey -v
+        bindkey -M viins 'jk' vi-cmd-mode
+
+        # Cursor shape: block in normal, beam in insert
+        function zle-keymap-select {
+          if [[ $KEYMAP == vicmd ]]; then
+            echo -ne '\e[1 q'   # block cursor
+          else
+            echo -ne '\e[5 q'   # beam cursor
+          fi
+        }
+        zle -N zle-keymap-select
+        
+        function zle-line-init {
+          echo -ne '\e[5 q'     # beam cursor on new prompt
+        }
+        zle -N zle-line-init
 
 
         # ==============================
@@ -188,6 +210,11 @@ with lib;
         # ==============================
         # Plugins
         # ==============================
+        # KEYTIMEOUT=1
+        # ZVM_LINE_INIT_MODE=$ZVM_MODE_INSERT
+        # ZVM_VI_INSERT_ESCAPE_BINDKEY=jk
+        # source ${zsh-vi-mode}/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh
+
         source ${zsh-autosuggestions}/share/zsh-autosuggestions/zsh-autosuggestions.zsh
         source ${zsh-syntax-highlighting}/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
         source ${zsh-history-substring-search}/share/zsh-history-substring-search/zsh-history-substring-search.zsh
