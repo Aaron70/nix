@@ -24,10 +24,12 @@ in {
       preferences = {
         profile = "personal";
 
-        desktop = {
-          enable = true;
-          modKey = "alt";
-          modKeyAlt = "super";
+        programs = {
+          desktop = {
+            enable = true;
+            modKey = "alt";
+            modKeyAlt = "super";
+          };
         };
       };
     };
