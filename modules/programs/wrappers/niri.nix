@@ -48,8 +48,8 @@ with lib;
         }
         
         input {
-          mod-key "Super"
-          mod-key-nested "Alt"
+          mod-key "${config.configurations.modKey}"
+          mod-key-nested "${config.configurations.modKeyAlt}"
           warp-mouse-to-focus
           focus-follows-mouse max-scroll-amount="5%"
         
