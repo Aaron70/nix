@@ -13,6 +13,18 @@ in {
 
     options.preferences.desktop = {
       enable = mkEnableOption "Whether to enable the desktop environment.";
+
+      modKey = mkOption {
+        type = types.str;
+        description = "The mod key to be used by the window manager.";
+        default = "super";
+      };
+
+      modKeyAlt = mkOption {
+        type = types.str;
+        description = "The alternative mod key to be used by the window manager.";
+        default = "alt";
+      };
     };
 
     config = mkIf config.preferences.desktop.enable {
@@ -21,6 +33,10 @@ in {
         enable = true;
         package = self.wrappers.desktop.wrap { 
           inherit pkgs;
+          configurations = {
+            modKey = config.preferences.desktop.modKey;
+            modKeyAlt = config.preferences.desktop.modKeyAlt;
+          };
         };
       };
 
@@ -39,6 +55,18 @@ in {
 
   flake.modules.generic.desktop = { pkgs, ... }: {
     options.configurations = {
+      modKey = mkOption {
+        type = types.str;
+        description = "The mod key to be used by the window manager.";
+        default = "super";
+      };
+
+      modKeyAlt = mkOption {
+        type = types.str;
+        description = "The alternative mod key to be used by the window manager.";
+        default = "alt";
+      };
+
       terminal = mkOption {
         type = types.package;
         description = "The wrapped and configured terminal package.";

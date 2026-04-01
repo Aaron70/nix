@@ -23,7 +23,11 @@ in {
       preferences = {
         profile = "personal";
 
-        desktop.enable = true;
+        desktop = {
+          enable = true;
+          modKey = "alt";
+          modKeyAlt = "super";
+        };
       };
     };
   };
