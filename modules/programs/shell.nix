@@ -98,6 +98,7 @@ in {
         ripgrep
         sesh
         television
+        wl-clipboard
         zoxide
 
         # Wrapped

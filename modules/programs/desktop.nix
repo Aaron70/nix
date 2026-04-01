@@ -43,6 +43,9 @@ in {
       environment.systemPackages = with pkgs; [
         spotify
         discord
+        vlc # Videos
+        shotwell # Images
+        mission-center
       ] ++ config.configurations.packages;
     };
   };
@@ -104,11 +107,13 @@ in {
       desktopShell = self.wrappers.noctalia.wrap { inherit pkgs; };
       appLauncher = (pkgs.writeShellScriptBin "launcher" "${getExe desktopShell} ipc call launcher toggle");
 
-      packages = [
+      packages = with pkgs; [
         terminal
         browser
         desktopShell
         appLauncher
+        pavucontrol
+        brightnessctl
       ];
 
       fontsConfig = pkgs.makeFontsConf {
