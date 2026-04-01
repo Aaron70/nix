@@ -3,7 +3,7 @@ if [ -z "$TMUX" ]; then
   exit 1
 fi
 
-command="tmux new-session -A -s \"'$(tmux display-message -p "#S")\""
+command="tmux new-session -A -s \"$(tmux display-message -p "#S")'\""
 id="0"
 if [ -n "$1" ]; then
   command="$1"
