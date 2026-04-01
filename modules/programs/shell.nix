@@ -1,4 +1,4 @@
-{ self, lib, ... }: 
+{ inputs, self, lib, ... }: 
 
 with lib;
 let
@@ -7,7 +7,18 @@ in {
 
   flake.nixosModules.shell = { pkgs, config, ... }: {
     config = let 
-      shellPackage = self.wrappers.shell.wrap { inherit pkgs; };
+      shellPackage = self.wrappers.shell.wrap { 
+        inherit pkgs; 
+        configurations.gitPackage = mkForce (self.wrappers.git.wrap { 
+          inherit pkgs; 
+          settings = {
+            user = {
+              name = config.profile.user.username;
+              email = config.profile.user.email;
+            };
+          };
+        });
+      };
     in {
 
       programs.${shell}.enable = true;
@@ -100,6 +111,7 @@ in {
         # Wrapped
         config.configurations.gitPackage
         config.configurations.multiplexer
+        inputs.nvim.packages.${pkgs.system}.nvim
 
         # Scripts
         (writeShellScriptBin "hydrate-paths" (readFile ./scripts/hydrate-paths.sh))
