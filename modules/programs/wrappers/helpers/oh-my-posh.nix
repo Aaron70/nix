@@ -29,7 +29,7 @@
                 "style": "plain",
                 "foreground": "${colors.base07}",
                 "background": "transparent",
-                "github_icon": " ",
+                "github_icon": " ",
                 "gitlab_icon": " ",
                 "bitbucket_icon": " ",
                 "template": "{{ .UpstreamIcon }} {{ if or (.Working.Changed) (.Staging.Changed) }} {{ end }}{{ .HEAD }}<cyan>{{ if gt .Behind 0 }}⇣{{ end }}{{ if gt .Ahead 0 }}⇡{{ end }}</>",
