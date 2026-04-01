@@ -7,18 +7,7 @@ in {
 
   flake.nixosModules.shell = { pkgs, config, ... }: {
     config = let 
-      shellPackage = self.wrappers.shell.wrap { 
-        inherit pkgs; 
-        configurations.gitPackage = mkForce (self.wrappers.git.wrap { 
-          inherit pkgs; 
-          settings = {
-            user = {
-              name = config.profile.user.username;
-              email = config.profile.user.email;
-            };
-          };
-        });
-      };
+      shellPackage = self.wrappers.shell.wrap { inherit pkgs; };
     in {
 
       programs.${shell}.enable = true;
@@ -30,6 +19,13 @@ in {
       environment.systemPackages = [
         shellPackage
       ] ++ config.configurations.packages;
+
+      environment.variables = rec {
+        GIT_AUTHOR_NAME = config.profile.user.username;
+        GIT_AUTHOR_EMAIL = config.profile.user.email;
+        GIT_COMMITER_NAME = GIT_AUTHOR_NAME;
+        GIT_COMMITER_EMAIL = GIT_AUTHOR_EMAIL;
+      };
     };
   };
 
@@ -61,11 +57,6 @@ in {
         description = "The shell prompt package.";
       };
 
-      gitPackage = mkOption {
-        type = types.package;
-        description = "The wrapped and configured git package.";
-      };
-
       multiplexer = mkOption {
         type = types.package;
         description = "The wrapped and configured terminal multiplexer.";
@@ -74,7 +65,6 @@ in {
 
     config.configurations = {
       shellPrompt = self.wrappers.oh-my-posh.wrap { inherit pkgs; };
-      gitPackage = self.wrappers.git.wrap { inherit pkgs; };
       multiplexer = let shellPath = getExe config.package; in (self.wrappers.tmux.wrap { 
         inherit pkgs; 
         shell = shellPath;
@@ -100,6 +90,8 @@ in {
         file
         fzf
         gcc
+        gh
+        git
         imgcat
         lazygit
         nh
@@ -109,7 +101,6 @@ in {
         zoxide
 
         # Wrapped
-        config.configurations.gitPackage
         config.configurations.multiplexer
         inputs.nvim.packages.${pkgs.system}.nvim
 
