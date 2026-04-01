@@ -24,7 +24,9 @@ in {
       preferences = {
         profile = "personal";
 
-        desktop.enable = true;
+        programs = {
+          desktop.enable = true;
+        };
       };
     };
   };
