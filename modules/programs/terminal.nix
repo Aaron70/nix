@@ -21,7 +21,7 @@ in {
     ];
   };
 
-  flake.modules.generic.terminal = { pkgs, ... }: {
+  flake.programs.terminal = { pkgs, ... }: {
     options.configurations = {
       shell = mkOption {
         type = types.package;

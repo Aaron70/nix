@@ -40,7 +40,7 @@ in {
     ];
   };
 
-  flake.modules.generic.shell = { pkgs, config, ... }: {
+  flake.programs.shell = { pkgs, config, ... }: {
     options.configurations = {
       shellAliases = mkOption {
         type = types.attrsOf (types.nullOr types.str);

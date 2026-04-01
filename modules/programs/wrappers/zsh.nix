@@ -6,7 +6,7 @@ with lib;
   flake.wrappers.zsh = { wlib, pkgs, config, ... }:
   {
     imports = [ 
-      self.modules.generic.shell
+      self.programs.shell
       wlib.wrapperModules.zsh
     ];
 

@@ -6,7 +6,7 @@ with lib;
   flake.wrappers.niri = { wlib, pkgs, config, ... }:
   {
     imports = [ 
-      self.modules.generic.desktop
+      self.programs.desktop
       wlib.wrapperModules.niri
     ];
 

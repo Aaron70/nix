@@ -4,7 +4,7 @@ with lib;
 {
   flake.wrappers.ghostty = { config, ... }: {
     imports = [ 
-      self.modules.generic.terminal
+      self.programs.terminal
       self.wrapperModules._ghostty 
     ];
 

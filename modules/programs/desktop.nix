@@ -7,11 +7,11 @@ in {
 
   flake.nixosModules.desktop = { pkgs, config, ... }: {
     imports = [
-      self.modules.generic.desktop
+      self.programs.desktop
       self.nixosModules.terminal
     ];
 
-    options.preferences.desktop = {
+    options.preferences.programs.desktop = {
       enable = mkEnableOption "Whether to enable the desktop environment.";
 
       modKey = mkOption {
@@ -27,22 +27,24 @@ in {
       };
     };
 
-    config = mkIf config.preferences.desktop.enable {
+    config = mkIf config.preferences.programs.desktop.enable {
       services.displayManager.gdm.enable = true;
       programs.${desktop} = {
         enable = true;
         package = self.wrappers.desktop.wrap { 
           inherit pkgs;
           configurations = {
-            modKey = config.preferences.desktop.modKey;
-            modKeyAlt = config.preferences.desktop.modKeyAlt;
+            modKey = config.preferences.programs.desktop.modKey;
+            modKeyAlt = config.preferences.programs.desktop.modKeyAlt;
           };
         };
       };
 
       environment.systemPackages = with pkgs; [
+        # Applications
         spotify
-        discord
+
+        # Essentials
         vlc # Videos
         shotwell # Images
         mission-center
@@ -56,7 +58,7 @@ in {
     ];
   };
 
-  flake.modules.generic.desktop = { pkgs, ... }: {
+  flake.programs.desktop = { pkgs, ... }: {
     options.configurations = {
       modKey = mkOption {
         type = types.str;
