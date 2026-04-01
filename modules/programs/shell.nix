@@ -30,6 +30,7 @@ in {
       environment.shellAliases = {
         ntest = "nh os test -H ${config.information.hostname}";
         nswitch = "nh os switch -H ${config.information.hostname}";
+        nbuild-vm = "nh os build-vm -H ${config.information.hostname}";
       };
     };
   };
