@@ -61,6 +61,7 @@ with lib;
 
       services.blueman.enable = true;
 
+      hardware.enableAllFirmware = true;
       hardware.bluetooth = {
         enable = true;
         powerOnBoot = true;

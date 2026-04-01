@@ -115,6 +115,7 @@ in {
         desktopShell
         appLauncher
         pavucontrol
+        playerctl
         brightnessctl
       ];
 
