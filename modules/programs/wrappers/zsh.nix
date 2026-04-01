@@ -223,6 +223,13 @@ with lib;
         if [ "$TERM_PROGRAM" != "Apple_Terminal" ]; then
           eval "$(${getExe' config.configurations.shellPrompt "oh-my-posh"} init zsh)"
         fi
+
+        if [[ "$TMUX" == "" ]]; then
+          if [[ "$(tmux ls 2>/dev/null)" == "" ]]; then
+            tmux new -s kyoten
+          fi
+          sesh connect kyoten 
+        fi
       '';
     };
   };

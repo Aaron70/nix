@@ -55,7 +55,8 @@ with lib; {
         set -g window-status-bell-style "fg=red,nobold"
 
         bind-key x kill-pane # skip "kill-pane 1? (y/n)" prompt
-        set -g detach-on-destroy off  # don't exit from tmux when closing a session
+        # NOTE: Commented as it didn't worked well with the {name}' sessions for the floating panes
+        # set -g detach-on-destroy off  # don't exit from tmux when closing a session
 
         bind-key -r f run-shell "sessions"
         bind-key -r l run-shell "toggle-tmux-popup"

@@ -103,7 +103,7 @@ in {
 
         # Wrapped
         config.configurations.multiplexer
-        inputs.nvim.packages.${pkgs.system}.nvim
+        inputs.nvim.packages.${pkgs.stdenv.hostPlatform.system}.nvim
 
         # Scripts
         (writeShellScriptBin "hydrate-paths" (readFile ./scripts/hydrate-paths.sh))
