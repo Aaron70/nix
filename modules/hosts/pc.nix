@@ -1,4 +1,4 @@
-{ inputs, self, ... }: 
+{ inputs, self, lib, ... }: 
 
 let
   host = "pc";
@@ -7,7 +7,7 @@ in {
     modules = [ self.nixosModules.${host} ];
   };
 
-  flake.nixosModules.${host} = { ... }: {
+  flake.nixosModules.${host} = { pkgs, ... }: {
     imports = [
       self.nixosModules.configurations 
       self.nixosModules."${host}-hardware"
@@ -26,6 +26,15 @@ in {
 
         programs = {
           desktop.enable = true;
+          cowsay.enable = true;
+          hello = {
+            enable = true;
+            # package = lib.mkForce (self.wrappers.hello.wrap { 
+            #   inherit pkgs; 
+            #   configurations.greeting = lib.mkForce "Hello wrapper"; 
+            # });
+            configurations.greeting = lib.mkForce "hello program from pc";
+          };
         };
       };
     };
