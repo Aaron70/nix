@@ -25,8 +25,7 @@ in {
         profile = "personal";
 
         programs = {
-          desktop.enable = false;
-          shell.enable = true;
+          desktop.enable = true;
           cowsay.enable = true;
           hello = {
             enable = true;

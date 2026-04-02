@@ -6,7 +6,11 @@ let
   terminal = "kitty";
 in {
 
-  flake.nixosModules.programs = self.lib.mkNixosProgram name ({ ... }: {});
+  flake.nixosModules.programs = self.lib.mkNixosProgram name ({ ... }: {
+    config = {
+      preferences.programs.shell.enable = mkDefault true;
+    };
+  });
 
   flake.programs.${name} = self.lib.mkProgram name ({ pkgs, cfg, ... }@inputs: let
     definition = self.definitions.programs.${name} inputs;
