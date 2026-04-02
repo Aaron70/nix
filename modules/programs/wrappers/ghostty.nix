@@ -7,7 +7,7 @@ in {
 
   flake.nixosModules.programs = self.lib.mkNixosProgram name ({ ... }: {});
 
-  flake.programs.${name} = self.lib.mkProgram name ({ cfg, ... }@inputs: let
+  flake.programs.${name} = self.lib.mkProgram name ({ pkgs, cfg, ... }@inputs: let
     definition = self.definitions.programs.terminal inputs;
   in {
     options = definition.options;
