@@ -8,7 +8,6 @@ in {
   flake.nixosModules.desktop = { pkgs, config, ... }: {
     imports = [
       self.programs.desktop
-      self.nixosModules.terminal
     ];
 
     options.preferences.programs.desktop = {
