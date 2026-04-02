@@ -6,20 +6,7 @@ let
   terminal = "kitty";
 in {
 
-  # flake.nixosModules.terminal = { pkgs, ... }: {
-  #   imports = [
-  #     self.nixosModules.shell
-  #   ];
-  #
-  #   environment.systemPackages = [
-  #   ];
-  # };
-
-  flake.nixosModules.programs = self.lib.mkNixosProgram name ({ ... }: {
-    imports = [
-      self.nixosModules.shell
-    ];
-  });
+  flake.nixosModules.programs = self.lib.mkNixosProgram name ({ ... }: {});
 
   flake.programs.${name} = self.lib.mkProgram name ({ cfg, ... }: {
     config = {

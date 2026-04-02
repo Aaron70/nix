@@ -1,12 +1,28 @@
 { self, lib, ... }: 
 
 with lib;
-{ 
+let
+  name = "zsh";
+in {
 
-  flake.wrappers.zsh = { wlib, pkgs, config, ... }:
+  flake.nixosModules.programs = self.lib.mkNixosProgram name ({ ... }: {});
+
+  flake.programs.${name} = self.lib.mkProgram name ({ pkgs, cfg, ... }@inputs: let
+    definition = self.definitions.programs.shell inputs;
+  in {
+    options = definition.options;
+    config = {
+      package = self.wrappers.${name}.wrap {
+        inherit pkgs;
+        configurations = cfg.configurations;
+      };
+    };
+  });
+
+  flake.wrappers.${name} = { wlib, pkgs, config, ... }:
   {
     imports = [ 
-      self.programs.shell
+      self.definitions.programs.shell
       wlib.wrapperModules.zsh
     ];
 
@@ -15,12 +31,6 @@ with lib;
       zshAliases = config.configurations.shellAliases;
 
       extraPackages = [
-        # Zsh
-        # zsh-autosuggestions
-        # zsh-syntax-highlighting 
-        # zsh-history-substring-search
-        # zsh-fzf-tab 
-
         #wrapped
         config.configurations.shellPrompt
       ] ++ config.configurations.packages;
