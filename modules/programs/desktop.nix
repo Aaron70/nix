@@ -54,6 +54,7 @@ in {
 
   flake.nixosModules.programs = self.lib.mkNixosProgram name ({ pkgs, cfg, ... }: {
     config = {
+      preferences.programs.terminal.enable = mkDefault true;
       services.displayManager.gdm.enable = true;
       programs.${desktop} = {
         enable = true;
@@ -159,6 +160,8 @@ in {
         browser
         desktopShell
         appLauncher
+
+        alacritty
 
         # Dependencies
         pavucontrol
