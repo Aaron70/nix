@@ -1,10 +1,28 @@
 { self, lib, ... }: 
 
 with lib;
+let
+  name = "kitty";
+in
 {
-  flake.wrappers.kitty = { config, ... }: {
+
+  flake.nixosModules.programs = self.lib.mkNixosProgram name ({ ... }: {});
+
+  flake.programs.${name} = self.lib.mkProgram name ({ cfg, ... }@inputs: let
+    definition = self.definitions.programs.terminal inputs;
+  in {
+    options = definition.options;
+    config = {
+      package = self.wrappers.${name}.wrap {
+        inherit pkgs;
+        configurations = cfg.configurations;
+      };
+    };
+  });
+
+  flake.wrappers.${name} = { config, ... }: {
     imports = [ 
-      self.programs.terminal
+      self.definitions.programs.terminal
       self.wrapperModules._kitty 
     ];
 
