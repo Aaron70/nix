@@ -20,15 +20,15 @@ with lib;
       cfg = config.preferences.programs.${name};
       moduleEvaluated = (module (inputs // { inherit cfg; }));
     in {
-      imports = [
+      imports = ([
         self.programs.${name}
-      ] ++ (if moduleEvaluated ? imports then moduleEvaluated.imports else []);
+      ] ++ (if moduleEvaluated ? imports then moduleEvaluated.imports else []));
 
       options = (if moduleEvaluated ? options then moduleEvaluated.options else {});
 
-      config = mkIf cfg.enable {
+      config = mkIf cfg.enable ({
         environment.systemPackages = mkIf (cfg.package != null) [ cfg.package ];
-      } // (if moduleEvaluated ? config then moduleEvaluated.config else {});
+      } // (if moduleEvaluated ? config then moduleEvaluated.config else {}));
     });
 
     flake.lib.mkProgram = name: module: ({ pkgs, config, ... }@inputs: 
@@ -38,7 +38,7 @@ with lib;
     in {
       imports = if moduleEvaluated ? imports then moduleEvaluated.imports else [];
 
-      options.preferences.programs.${name} = {
+      options.preferences.programs.${name} = ({
         enable = mkEnableOption "Whether to enable the ${name} program.";
         package = mkOption {
           type = types.nullOr types.package;
@@ -46,7 +46,7 @@ with lib;
           default = null;
         };
         configurations = {};
-      } // (if moduleEvaluated ? options then moduleEvaluated.options else {});
+      } // (if moduleEvaluated ? options then moduleEvaluated.options else {}));
 
       config = mkIf cfg.enable {
         preferences.programs.${name} = moduleEvaluated.config;

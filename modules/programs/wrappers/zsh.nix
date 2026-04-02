@@ -11,12 +11,12 @@ in {
     definition = self.definitions.programs.shell inputs;
   in {
     options = definition.options;
-    config = {
+    config = ({
       package = self.wrappers.${name}.wrap {
         inherit pkgs;
         configurations = cfg.configurations;
       };
-    };
+    } // definition.config);
   });
 
   flake.wrappers.${name} = { wlib, pkgs, config, ... }:
