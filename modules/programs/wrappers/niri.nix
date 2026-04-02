@@ -1,12 +1,29 @@
 { self, lib, ... }: 
 
 with lib;
+let
+  name = "niri";
+in
 { 
+
+  flake.nixosModules.programs = self.lib.mkNixosProgram name ({ ... }: {});
+
+  flake.programs.${name} = self.lib.mkProgram name ({ pkgs, cfg, config, ... }@inputs: let
+    definition = self.definitions.programs.desktop inputs;
+  in {
+    options = definition.options;
+    config = {
+      package = self.wrappers.${name}.wrap {
+        inherit pkgs;
+        configurations = cfg.configurations;
+      };
+    } // definition.config;
+  });
 
   flake.wrappers.niri = { wlib, pkgs, config, ... }:
   {
     imports = [ 
-      self.programs.desktop
+      self.definitions.programs.desktop
       wlib.wrapperModules.niri
     ];
 

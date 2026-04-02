@@ -9,6 +9,7 @@ in {
   flake.nixosModules.programs = self.lib.mkNixosProgram name ({ config, cfg, ... }: let
     shellPackage = cfg.package; 
   in {
+    config = {
       programs.${shell}.enable = true;
       environment.pathsToLink = [ "/share/${shell}" ];
 
@@ -31,24 +32,39 @@ in {
         nswitch = "nh os switch -H ${config.information.hostname}";
         nbuild-vm = "nh os build-vm -H ${config.information.hostname}";
       };
-  });
-
-  flake.programs.${name} = self.lib.mkProgram name ({ pkgs, cfg, ... }@inputs: let
-    definition = self.definitions.programs.${name} inputs;
-  in {
-    options = definition.options;
-    config = {
-      package = self.wrappers.${name}.wrap {
-        inherit pkgs;
-        configurations = cfg.configurations;
-      };
     };
   });
 
-  flake.wrappers.${name} = { ... }: {
+  flake.programs.${name} = self.lib.mkProgram name ({ pkgs, cfg, config, ... }@inputs: let
+    definition = self.definitions.programs.${name} inputs;
+  in {
+    options = definition.options;
+    config = ({
+      package = self.wrappers.${name}.wrap {
+        inherit pkgs;
+        configurations = (rec {
+          multiplexer = let shellPath = getExe cfg.package; in mkDefault (self.wrappers.tmux.wrap {
+            inherit pkgs; 
+            shell = shellPath;
+          });
+          packages = [ multiplexer ];
+        } // cfg.configurations);
+      };
+    } // definition.config);
+  });
+
+  flake.wrappers.${name} = { pkgs, config, ... }: {
     imports = [
       self.wrapperModules.${shell}
     ];
+
+    config.configurations = rec {
+      multiplexer = let shellPath = getExe config.package; in mkDefault (self.wrappers.tmux.wrap {
+        inherit pkgs; 
+        shell = shellPath;
+      });
+      packages = [ multiplexer ];
+    };
   };
 
   flake.definitions.programs.${name} = { pkgs, config, ... }: {
@@ -78,37 +94,6 @@ in {
       packages = mkOption {
         type = types.listOf types.package;
         description = "An list of packages to install.";
-          default = with pkgs; [
-          # Dependencies
-          chafa
-          eza
-          fd
-          file
-          fzf
-          gcc
-          gh
-          git
-          git-crypt
-          imgcat
-          lazygit
-          nh
-          ripgrep
-          sesh
-          television
-          wl-clipboard
-          zoxide
-
-          # Wrapped
-          config.configurations.multiplexer
-          inputs.nvim.packages.${pkgs.stdenv.hostPlatform.system}.nvim
-
-          # Scripts
-          (writeShellScriptBin "hydrate-paths" (readFile ./scripts/hydrate-paths.sh))
-          (writeShellScriptBin "custom-fzf-preview" (readFile ./scripts/custom-fzf-preview.sh))
-          (writeShellScriptBin "cdfzf" (readFile ./scripts/cdfzf.sh))
-          (writeShellScriptBin "toggle-tmux-popup" (readFile ./scripts/toogle-tmux-popup.sh))
-          (writeShellScriptBin "sessions" (readFile ./scripts/sessions.sh))
-        ];
       };
 
       shellPrompt = mkOption {
@@ -120,12 +105,40 @@ in {
       multiplexer = mkOption {
         type = types.package;
         description = "The wrapped and configured terminal multiplexer.";
-        default = let shellPath = getExe config.package; in (self.wrappers.tmux.wrap { 
-          inherit pkgs; 
-          shell = shellPath;
-        });
       }; 
     };
-  };
 
+    config.configurations = {
+      packages = with pkgs; [
+        # Dependencies
+        chafa
+        eza
+        fd
+        file
+        fzf
+        gcc
+        gh
+        git
+        git-crypt
+        imgcat
+        lazygit
+        nh
+        ripgrep
+        sesh
+        television
+        wl-clipboard
+        zoxide
+
+        # Wrapped
+        inputs.nvim.packages.${pkgs.stdenv.hostPlatform.system}.nvim
+
+        # Scripts
+        (writeShellScriptBin "hydrate-paths" (readFile ./scripts/hydrate-paths.sh))
+        (writeShellScriptBin "custom-fzf-preview" (readFile ./scripts/custom-fzf-preview.sh))
+        (writeShellScriptBin "cdfzf" (readFile ./scripts/cdfzf.sh))
+        (writeShellScriptBin "toggle-tmux-popup" (readFile ./scripts/toogle-tmux-popup.sh))
+        (writeShellScriptBin "sessions" (readFile ./scripts/sessions.sh))
+      ];
+    };
+  };
 }
