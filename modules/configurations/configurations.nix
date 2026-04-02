@@ -6,6 +6,7 @@ with lib;
     imports = [ 
       self.nixosModules.host
       self.nixosModules.profile
+      self.nixosModules.programs
       self.nixosModules.desktop
     ];
 
