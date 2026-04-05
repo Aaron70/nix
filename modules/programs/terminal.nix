@@ -12,26 +12,16 @@ in {
     };
   });
 
-  flake.programs.${name} = self.lib.mkProgram name ({ pkgs, cfg, ... }@inputs: let
-    definition = self.definitions.programs.${name} inputs;
-  in {
-    options = definition.options;
-    config = {
-      package = self.wrappers.${name}.wrap {
-        inherit pkgs;
-        configurations = cfg.configurations;
-      };
-    };
+  flake.programs.${name} = self.lib.mkProgram name ({ pkgs, cfg, ... }: {
+    configurations = [ self.definitions.programs.${name} ];
   });
 
   flake.wrappers.${name} = { ... }: {
-    imports = [
-      self.wrapperModules.${terminal}
-    ];
+    imports = [ self.wrapperModules.${terminal} ];
   };
 
   flake.definitions.programs.${name} = { pkgs, ... }: {
-    options.configurations = {
+    options = {
       shell = mkOption {
         type = types.package;
         description = "The wrapped and configured shell package.";
