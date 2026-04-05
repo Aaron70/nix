@@ -27,6 +27,10 @@ in {
         programs = {
           desktop.enable = true;
         };
+
+        features = {
+          gaming.enable = true;
+        };
       };
     };
   };

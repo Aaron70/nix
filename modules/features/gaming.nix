@@ -1,45 +1,28 @@
 { self, lib, ... }: 
 
 with lib;
-{
-  flake.nixosModules.features = { config, ... }: {
-    imports = [ 
-      self.features.gaming 
-      self.nixosModules.steam
-    ];
+let
+  name = "gaming";
+in {
 
+  flake.nixosModules.features = self.lib.mkNixosFeature name ({ ... }: { });
+
+  flake.features.${name} = self.lib.mkFeature name ({ pkgs, ... }: {
     config = {
-      preferences.programs = {
-        steam = true;
+      programs = {
+        steam.enable = true;
       };
 
-      environment.systemPackages = config.preferences.features.gaming;
+      packages = with pkgs; [
+        # Games
+        ryubing # Nintendo Switch simulator
+        pokemmo-installer # PokeMMO
+        (heroic.override { extraPkgs = pkgs: [ pkgs.gamescope ]; }) # Epic Games Launcher
+
+        # Tools/Dependencies/Compatibility
+        mangohud
+        protonup-ng
+      ];
     };
-  };
-
-  flake.features.gaming = { pkgs, ... }: {
-    options.preferences.features.gaming = {
-      enable = mkEnableOption "Whether to enable the gaming feature.";
-
-      packages = mkOption {
-        type = types.listOf types.package;
-        description = "An list of packages to install.";
-      };
-    };
-
-    config = mkIf config.features.gaming.enable {
-      features.gaming = {
-        packages = with pkgs; [
-          # Games
-          ryubing # Nintendo Switch simulator
-          pokemmo-installer
-          (heroic.override { extraPkgs = pkgs: [ pkgs.gamescope ]; })
-
-          # Tools/Dependencies/Compatibility
-          mangohud
-          protonup-ng
-        ];
-      };
-    };
-  }; 
-}
+  });
+ }

@@ -7,6 +7,7 @@ with lib;
       self.nixosModules.host
       self.nixosModules.profile
       self.nixosModules.programs
+      self.nixosModules.features
     ];
 
     config = {

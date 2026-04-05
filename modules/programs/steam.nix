@@ -4,7 +4,7 @@ with lib;
 let
   name = "steam";
 in {
-  flake.nixosModules.programs = self.lib.mkNixosProgram name ({ ... }: {
+  flake.nixosModules.programs = self.lib.mkNixosProgram name ({ pkgs, ... }: {
     config = {
       environment.sessionVariables = {
         STEAM_EXTRA_COMPAT_TOOLS_PATHS = "$HOME/.steam/root/compatibilitytools.d";
