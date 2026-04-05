@@ -2,14 +2,21 @@
 { self, lib, ... }: 
 
 with lib;
+let
+  name = "oh-my-posh";
+in
 {
-  flake.wrappers.oh-my-posh = { pkgs, config, ... }: 
+  
+  flake.nixosModules.programs = self.lib.mkNixosProgram name ({ ... }: {});
+  flake.programs.${name} = self.lib.mkProgram name ({ ... }: {});
+
+  flake.wrappers.${name} = { pkgs, config, ... }: 
   {
     imports = [ 
       self.wrapperModules._oh-my-posh 
-      self.wrapperHelpers.modules.theme
+      (self.lib.mkConfigurationsOption [ self.wrapperHelpers.modules.theme ])
     ];
-    config = let colors = config.colors; in {
+    config = let colors = config.configurations.colors; in {
       extraPackages = with pkgs; [
         nerd-fonts.jetbrains-mono
       ];

@@ -6,9 +6,8 @@ let
 in{
   flake.nixosModules.programs = self.lib.mkNixosProgram name ({ ... }: {});
 
-  flake.programs.${name} = self.lib.mkProgram name ({ pkgs, cfg, ... }: {
+  flake.programs.${name} = self.lib.mkProgram name ({ ... }: {
     configurations = [ self.definitions.${name} ];
-    config = { };
   });
 
   flake.wrappers.${name} = { wlib, pkgs, config, ... }:

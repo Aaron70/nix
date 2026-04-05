@@ -8,9 +8,8 @@ in
 
   flake.nixosModules.programs = self.lib.mkNixosProgram name ({ ... }: {});
 
-  flake.programs.${name} = self.lib.mkProgram name ({ pkgs, cfg, config, ... }: {
+  flake.programs.${name} = self.lib.mkProgram name ({ ... }: {
     configurations = [ self.definitions.programs.desktop ];
-    config = { };
   });
 
   flake.wrappers.niri = { wlib, pkgs, config, ... }:

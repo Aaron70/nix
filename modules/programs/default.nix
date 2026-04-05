@@ -61,7 +61,7 @@ with lib;
       } // (if moduleEvaluated ? options then moduleEvaluated.options else {}));
 
       config = mkIf cfg.enable {
-        preferences.programs.${name} = moduleEvaluated.config;
+        preferences.programs.${name} = moduleEvaluated.config or {};
       };
     });
 
