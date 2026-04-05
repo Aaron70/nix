@@ -6,17 +6,11 @@ let
 in {
   flake.nixosModules.programs = self.lib.mkNixosProgram name ({ ... }: {});
 
-  flake.programs.${name} = self.lib.mkProgram name ({ pkgs, cfg, ... }: {
+  flake.programs.${name} = self.lib.mkProgram name ({ ... }: {
     configurations = [ self.definitions.${name} ];
-    config = {
-      package = self.wrappers.${name}.wrap {
-        inherit pkgs;
-        configurations = cfg.configurations;
-      };
-    };
   });
 
-  flake.wrappers.${name} = { wlib, config, pkgs, ... }@inputs: {
+  flake.wrappers.${name} = { wlib, config, pkgs, ... }: {
     imports = [ 
       wlib.modules.default 
       (self.lib.mkConfigurationsOption [ self.definitions.${name} ])

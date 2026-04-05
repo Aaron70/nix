@@ -1,8 +1,13 @@
 { self, ... }: 
 
+let 
+  name = "noctalia";
+in
 { 
+  flake.nixosModules.programs = self.lib.mkNixosProgram name ({ ... }: {});
+  flake.programs.${name} = self.lib.mkProgram name ({ ... }: {});
 
-  flake.wrappers.noctalia = { wlib, pkgs, ... }:
+  flake.wrappers.${name} = { wlib, pkgs, ... }:
   {
     imports = [ wlib.wrapperModules.noctalia-shell ];
     
