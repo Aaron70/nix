@@ -35,14 +35,12 @@ in {
     };
   });
 
-  flake.programs.${name} = self.lib.mkProgram name ({ pkgs, cfg, config, ... }@inputs: let
-    definition = self.definitions.programs.${name} inputs;
-  in {
-    options = definition.options;
-    config = ({
+  flake.programs.${name} = self.lib.mkProgram name ({ pkgs, cfg, ... }: {
+    configurations = [ self.definitions.programs.${name} ];
+    config = {
       package = self.wrappers.${name}.wrap {
         inherit pkgs;
-        configurations = (rec {
+        configurations = ({
           multiplexer = let shellPath = getExe cfg.package; in mkDefault (self.wrappers.tmux.wrap {
             inherit pkgs; 
             shell = shellPath;
@@ -50,7 +48,7 @@ in {
           packages = [ multiplexer ];
         } // cfg.configurations);
       };
-    } // definition.config);
+    };
   });
 
   flake.wrappers.${name} = { pkgs, config, ... }: {
@@ -67,8 +65,8 @@ in {
     };
   };
 
-  flake.definitions.programs.${name} = { pkgs, config, ... }: {
-    options.configurations = {
+  flake.definitions.programs.${name} = { pkgs, ... }: {
+    options = {
       shellAliases = mkOption {
         type = types.attrsOf (types.nullOr types.str);
         description = "An attrSet with shell aliases.";
@@ -108,7 +106,7 @@ in {
       }; 
     };
 
-    config.configurations = {
+    config = {
       packages = with pkgs; [
         # Dependencies
         chafa

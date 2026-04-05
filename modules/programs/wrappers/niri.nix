@@ -8,22 +8,15 @@ in
 
   flake.nixosModules.programs = self.lib.mkNixosProgram name ({ ... }: {});
 
-  flake.programs.${name} = self.lib.mkProgram name ({ pkgs, cfg, config, ... }@inputs: let
-    definition = self.definitions.programs.desktop inputs;
-  in {
-    options = definition.options;
-    config = {
-      package = self.wrappers.${name}.wrap {
-        inherit pkgs;
-        configurations = cfg.configurations;
-      };
-    } // definition.config;
+  flake.programs.${name} = self.lib.mkProgram name ({ pkgs, cfg, config, ... }: {
+    configurations = [ self.definitions.programs.desktop ];
+    config = { };
   });
 
   flake.wrappers.niri = { wlib, pkgs, config, ... }:
   {
     imports = [ 
-      self.definitions.programs.desktop
+      (self.lib.mkConfigurationsOption [ self.definitions.programs.desktop ])
       wlib.wrapperModules.niri
     ];
 

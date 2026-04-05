@@ -1,15 +1,25 @@
 { self, lib, ... }: 
 
-with lib; { 
-  flake.wrappers.tmux = { wlib, pkgs, config, ... }:
+with lib; 
+let
+  name = "tmux";
+in{
+  flake.nixosModules.programs = self.lib.mkNixosProgram name ({ ... }: {});
+
+  flake.programs.${name} = self.lib.mkProgram name ({ pkgs, cfg, ... }: {
+    configurations = [ self.definitions.${name} ];
+    config = { };
+  });
+
+  flake.wrappers.${name} = { wlib, pkgs, config, ... }:
   {
     imports = [ 
       wlib.wrapperModules.tmux 
-      self.wrapperHelpers.modules.theme
+      (self.lib.mkConfigurationsOption [ self.wrapperHelpers.modules.theme ])
     ];
 
     config = let
-      colors = config.colors;
+      colors = config.configurations.colors;
     in {
       prefix = "C-space";
       modeKeys = "vi";
