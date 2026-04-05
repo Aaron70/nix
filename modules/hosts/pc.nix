@@ -26,17 +26,6 @@ in {
 
         programs = {
           desktop.enable = true;
-          cowsay.enable = true;
-          hello = {
-            enable = true;
-            # package = lib.mkForce (self.wrappers.hello.wrap { 
-            #   inherit pkgs; 
-            #   configurations.greeting = lib.mkForce "Hello wrapper"; 
-            # });
-            configurations = {
-              package = lib.mkForce pkgs.foot;
-            };
-          };
         };
       };
     };

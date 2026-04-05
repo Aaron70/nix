@@ -1,13 +1,11 @@
-{ lib, ... }: 
+{ self, lib, ... }: 
 
 with lib;
-{
-  flake.nixosModules.steam = { pkgs, config, ... }: {
-    options.preferences.programs.steam = {
-      enable = mkEnableOption "Whether to enable steam.";
-    };
-
-    config = mkIf config.preferences.programs.steam.enable {
+let
+  name = "steam";
+in {
+  flake.nixosModules.programs = self.lib.mkNixosProgram name ({ ... }: {
+    config = {
       environment.sessionVariables = {
         STEAM_EXTRA_COMPAT_TOOLS_PATHS = "$HOME/.steam/root/compatibilitytools.d";
       };
@@ -36,5 +34,9 @@ with lib;
         };
       };
     };
-  };
+  });
+
+  flake.programs.${name} = self.lib.mkProgram name ({ ... }: {
+    configurations = [ self.definitions.programs.terminal ];
+  });
 }

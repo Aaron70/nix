@@ -5,53 +5,6 @@ let
   name = "desktop";
   desktop = "niri";
 in {
-
-  # flake.nixosModules.desktop = { pkgs, config, ... }: {
-  #   imports = [
-  #     self.programs.desktop
-  #   ];
-  #
-  #   options.preferences.programs.desktop = {
-  #     enable = mkEnableOption "Whether to enable the desktop environment.";
-  #
-  #     modKey = mkOption {
-  #       type = types.str;
-  #       description = "The mod key to be used by the window manager.";
-  #       default = "super";
-  #     };
-  #
-  #     modKeyAlt = mkOption {
-  #       type = types.str;
-  #       description = "The alternative mod key to be used by the window manager.";
-  #       default = "alt";
-  #     };
-  #   };
-  #
-  #   config = mkIf config.preferences.programs.desktop.enable {
-  #     services.displayManager.gdm.enable = true;
-  #     programs.${desktop} = {
-  #       enable = true;
-  #       package = self.wrappers.desktop.wrap { 
-  #         inherit pkgs;
-  #         configurations = {
-  #           modKey = config.preferences.programs.desktop.modKey;
-  #           modKeyAlt = config.preferences.programs.desktop.modKeyAlt;
-  #         };
-  #       };
-  #     };
-  #
-  #     environment.systemPackages = with pkgs; [
-  #       # Applications
-  #       spotify
-  #
-  #       # Essentials
-  #       vlc # Videos
-  #       shotwell # Images
-  #       mission-center
-  #     ] ++ config.configurations.packages;
-  #   };
-  # };
-
   flake.nixosModules.programs = self.lib.mkNixosProgram name ({ pkgs, cfg, ... }: {
     config = {
       preferences.programs.terminal.enable = mkDefault true;
@@ -63,9 +16,6 @@ in {
           configurations = cfg.configurations;
         };
       };
-
-      # TODO : Remove this
-      environment.shellAliases = { works = "echo works"; };
 
       environment.systemPackages = with pkgs; [
         # Applications
@@ -79,9 +29,8 @@ in {
     };
   });
 
-  flake.programs.${name} = self.lib.mkProgram name ({ pkgs, cfg, ... }: {
+  flake.programs.${name} = self.lib.mkProgram name ({ ... }: {
     configurations = [ self.definitions.programs.${name} ];
-    config = { };
   });
 
   flake.wrappers.${name} = { ... }: {

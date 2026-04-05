@@ -13,8 +13,8 @@ in {
 
   flake.wrappers.${name} = { config, ... }: {
     imports = [ 
-      self.definitions.programs.terminal
       self.wrapperModules._kitty 
+      (self.lib.mkConfigurationsOption [ self.definitions.programs.terminal ])
     ];
 
     config = {
