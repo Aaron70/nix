@@ -43,11 +43,14 @@ with lib;
         package = mkOption {
           type = types.nullOr types.package;
           description = "The package of the program, it could be a wrapper.";
-          default = null;
+          default = self.wrappers.${name}.wrap {
+            inherit pkgs;
+            configurations = cfg.configurations;
+          };
         };
         configurations = mkOption {
           type = types.submodule {
-            imports = moduleEvaluated.configurations;
+            imports = moduleEvaluated.configurations or [];
             _module.args = (inputs // { 
               config = cfg.configurations;
             });

@@ -7,23 +7,16 @@ in {
 
   flake.nixosModules.programs = self.lib.mkNixosProgram name ({ ... }: {});
 
-  flake.programs.${name} = self.lib.mkProgram name ({ pkgs, cfg, ... }@inputs: let
-    definition = self.definitions.programs.shell inputs;
-  in {
-    options = definition.options;
-    config = ({
-      package = self.wrappers.${name}.wrap {
-        inherit pkgs;
-        configurations = cfg.configurations;
-      };
-    } // definition.config);
+  flake.programs.${name} = self.lib.mkProgram name ({ pkgs, cfg, ... }: {
+    configurations = [ self.definitions.programs.shell ];
+    config = { };
   });
 
   flake.wrappers.${name} = { wlib, pkgs, config, ... }:
   {
     imports = [ 
-      self.definitions.programs.shell
       wlib.wrapperModules.zsh
+      (self.lib.mkConfigurationsOption [ self.definitions.programs.shell ])
     ];
 
     config = with pkgs; {

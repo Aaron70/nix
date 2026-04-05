@@ -79,16 +79,9 @@ in {
     };
   });
 
-  flake.programs.${name} = self.lib.mkProgram name ({ pkgs, cfg, config, ... }@inputs: let
-    definition = self.definitions.programs.${name} inputs;
-  in {
-    options = definition.options;
-    config = {
-      package = self.wrappers.${name}.wrap {
-        inherit pkgs;
-        configurations = cfg.configurations;
-      };
-    } // definition.config;
+  flake.programs.${name} = self.lib.mkProgram name ({ pkgs, cfg, ... }: {
+    configurations = [ self.definitions.programs.${name} ];
+    config = { };
   });
 
   flake.wrappers.${name} = { ... }: {
@@ -97,8 +90,8 @@ in {
     ];
   };
 
-  flake.definitions.programs.${name} = { pkgs, config, ... }: {
-    options.configurations = {
+  flake.definitions.programs.${name} = { pkgs, ... }: {
+    options = {
       modKey = mkOption {
         type = types.str;
         description = "The mod key to be used by the window manager.";
@@ -147,7 +140,7 @@ in {
       };
     };
 
-    config.configurations = let
+    config = let
       noctalia-shell = (self.wrappers.noctalia.wrap { inherit pkgs; });
     in rec {
       terminal = mkDefault (self.wrappers.terminal.wrap { inherit pkgs; });
