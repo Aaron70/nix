@@ -84,6 +84,8 @@ in {
         type = types.attrsOf (types.nullOr types.str);
         description = "An attrSet with environment variables.";
         default = {
+          EDITOR = "nvim";
+          SHELL = shell;
           TERM = "tmux-256color";
           NH_FLAKE = "~/nix";
         };
