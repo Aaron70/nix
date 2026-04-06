@@ -485,6 +485,9 @@ in
               {
                 id = "KeepAwake";
               }
+              {
+                id = "PowerProfile"; 
+              }
             ];
             right = [
               {
