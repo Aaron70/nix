@@ -25,6 +25,7 @@ in {
         GIT_AUTHOR_EMAIL = config.profile.user.email;
         GIT_COMMITER_NAME = GIT_AUTHOR_NAME;
         GIT_COMMITER_EMAIL = GIT_AUTHOR_EMAIL;
+        NH_FLAKE = "/home/${config.profile.user.username}/nix";
       };
 
       environment.shellAliases = {
@@ -87,7 +88,6 @@ in {
           EDITOR = "nvim";
           SHELL = shell;
           TERM = "tmux-256color";
-          NH_FLAKE = "~/nix";
         };
       };
 

@@ -4,7 +4,6 @@ with lib;
 {
   flake.nixosModules.configurations = { config, ... }: {
     imports = [ 
-      self.nixosModules.host
       self.nixosModules.profile
       self.nixosModules.programs
       self.nixosModules.features
