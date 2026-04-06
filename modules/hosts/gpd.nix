@@ -24,9 +24,39 @@ in {
       preferences = {
         profile = "personal";
 
+        features = {
+          gaming.enabled = true;
+        };
+
         programs = {
-          desktop.enable = true;
-          hello.enable = true;
+          desktop = {
+            enable = true;
+            configurations = {
+              monitors = rec {
+                HDMI-A-1 = {
+                  enabled = true; primary = true;
+                  x = 0; y = 0;
+                  width = 1920; height = 1080;
+                  refreshRate = 143.981;
+                };
+
+                DP-1 = rec {
+                  enabled = true; primary = false;
+                  x = -width; y = 0;
+                  width = 2560; height = 1440;
+                  refreshRate = 74.932;
+                };
+
+                eDP-1 = {
+                  enabled = true; primary = false;
+                  x = DP-1.x; y = 800;
+                  width = 2560; height = 1600;
+                  refreshRate = 60.009;
+                  scale = 2.0;
+                };
+              };
+            };
+          };
         };
       };
     };
