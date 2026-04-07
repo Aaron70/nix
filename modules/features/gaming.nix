@@ -14,6 +14,9 @@ in {
       };
 
       packages = with pkgs; [
+        # Communication
+        Discord
+
         # Games
         ryubing # Nintendo Switch simulator
         pokemmo-installer # PokeMMO
