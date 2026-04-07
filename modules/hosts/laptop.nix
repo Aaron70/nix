@@ -24,6 +24,13 @@ in {
       preferences = {
         profile = "personal";
 
+        features = {
+          gaming = {
+            enable = false;
+            gpu.isAMD = true;
+          };
+        };
+
         programs = {
           desktop = {
             enable = true;
