@@ -2,7 +2,7 @@
 
 with lib;
 {
-  flake.nixosModules.configurations = { config, ... }: {
+  flake.nixosModules.configurations = { pkgs, config, ... }: {
     imports = [ 
       self.nixosModules.profile
       self.nixosModules.programs

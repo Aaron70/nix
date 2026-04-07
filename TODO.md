@@ -12,4 +12,6 @@
   [*] Discord
   [] Jovian for GPD
 [] Fix the color on oh-my-posh prompt when there is a pending pull or push on a repository
-
+[*] Remove the notification about Noctalia plugins
+[] Fix the nswitch, ntest, nbuid-vm, nclean and nshell
+[] Rewrite Neovim configurations with wrapper?

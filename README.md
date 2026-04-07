@@ -19,6 +19,12 @@ git-crypt unlock /path/to/key
 git-crypt lock
 ```
 
+## Maintenance
+
+### Update Noctalia Plugins
+
+Get the commit has from the latest commit on the [Plugins Repository](https://github.com/noctalia-dev/noctalia-plugins/commits/main) and replace it on the `fetchgit` function, then use `sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=` as the **sha256** and run the configuration, it will fail and give you the real `sha256`.
+
 ## Troubleshooting
 
 ### No audio on headsets
