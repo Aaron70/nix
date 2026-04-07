@@ -28,10 +28,13 @@ in {
         NH_FLAKE = "/home/${config.profile.user.username}/nix";
       };
 
-      environment.shellAliases = {
-        ntest = "nh os test -H ${config.information.hostname}";
-        nswitch = "nh os switch -H ${config.information.hostname}";
-        nbuild-vm = "nh os build-vm -H ${config.information.hostname}";
+      environment.shellAliases = let
+        homePath = "/home/${config.profile.user.username}/nix";
+      in {
+        ntest = "nh os test ${homePath} -H ${config.information.hostname}";
+        nswitch = "nh os switch ${homePath} -H ${config.information.hostname}";
+        nbuild-vm = "nh os build-vm ${homePath} -H ${config.information.hostname}";
+        nclean = "nh clean all --optimise -k ${toString config.preferences.boot.configurationLimit}";
       };
     };
   });
