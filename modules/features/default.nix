@@ -22,7 +22,7 @@ with lib;
 
       options = (moduleEvaluated.options or {});
 
-      config = mkIf cfg.enabled ({
+      config = mkIf cfg.enable ({
         preferences.programs = cfg.programs;
         environment.systemPackages = cfg.packages;
       } // (moduleEvaluated.config or {}));
@@ -36,7 +36,7 @@ with lib;
       imports = moduleEvaluated.imports or [];
 
       options.preferences.features.${name} = ({
-        enabled = mkEnableOption "Whether to enable the ${name} feature.";
+        enable = mkEnableOption "Whether to enable the ${name} feature.";
         programs = mkOption {
           type = types.attrs;
           description = "The programs and their configurations to enable with this feature.";
@@ -49,7 +49,7 @@ with lib;
         };
       } // (moduleEvaluated.options or {}));
 
-      config = mkIf cfg.enabled {
+      config = mkIf cfg.enable {
         preferences.features.${name} = moduleEvaluated.config or {};
       };
     });
