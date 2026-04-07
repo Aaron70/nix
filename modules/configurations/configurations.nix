@@ -19,6 +19,7 @@ with lib;
         configurationLimit = mkDefault config.preferences.boot.configurationLimit;
       };
       boot.loader.efi.canTouchEfiVariables = true;
+      boot.kernelPackages = pkgs.linuxPackages_latest;
 
       services.xserver.videoDrivers = [ "nvidia" ];
       hardware = {
