@@ -14,8 +14,8 @@ in
     config = let
       noctalia-plugins = pkgs.fetchgit {
         url = "https://github.com/noctalia-dev/noctalia-plugins";
-        rev = "e56dcb6b4c7a680282d0279076a82754397d1fd5";
-        sha256 = "sha256-TNwt8BkZSmI62BwBgNdKaOiWX8ePyrJsxsPCcF4z660=";
+        rev = "3e679731daadccf94edddbaadb0ce3204fb72454";
+        sha256 = "sha256-AtZEYKVg5oudC+PzGssSbPIFY1p8R0DIybo7lrqyUiM=";
         sparseCheckout = [
           "privacy-indicator"
           "screen-recorder"
