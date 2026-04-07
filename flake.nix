@@ -16,6 +16,8 @@
 
     zen-browser.url = "github:youwen5/zen-browser-flake";
     zen-browser.inputs.nixpkgs.follows = "nixpkgs";
+
+    jovian.url = "github:Jovian-Experiments/Jovian-NixOS";
   };
 
   outputs = inputs: inputs.flake-parts.lib.mkFlake { inherit inputs; } { 
