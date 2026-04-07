@@ -15,7 +15,7 @@ in {
 
       packages = with pkgs; [
         # Communication
-        Discord
+        discord
 
         # Games
         ryubing # Nintendo Switch simulator
