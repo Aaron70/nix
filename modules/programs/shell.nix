@@ -72,6 +72,7 @@ in {
         type = types.attrsOf (types.nullOr types.str);
         description = "An attrSet with shell aliases.";
         default = {
+          cat = "bat";
           lg = "lazygit";
           eza = "eza --icons auto --git --group-directories-last";
           ls = "eza";
@@ -111,6 +112,7 @@ in {
     config = {
       packages = with pkgs; [
         # Dependencies
+        bat
         chafa
         eza
         fd
