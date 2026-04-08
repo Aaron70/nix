@@ -20,6 +20,20 @@ with lib;
   };
 
   config = {
+
+    flake.lib.mkNixosProfile = profile: preferences: ({ config, pkgs, ... }@inputs: {
+      config = mkIf (config.preferences.profile == profile) ({
+        preferences = {
+          programs = config.profile.programs;
+          features = config.profile.features;
+        };
+      } // preferences inputs);
+    });
+
+    flake.lib.mkProfile = profile: preferences: ({ config, pkgs, ... }: {
+      config = mkIf (config.preferences.profile == profile) (preferences { inherit config pkgs; });
+    });
+
     flake.nixosModules.profile = { ... }: {
       imports = [ 
         self.profile.module
@@ -43,6 +57,18 @@ with lib;
             type = types.str;
             description = "The email address of the user";
           };
+        };
+
+        programs = mkOption {
+          type = types.attrs;
+          description = "The programs and their configurations to enable with this profile.";
+          default = {};
+        };
+
+        features = mkOption {
+          type = types.attrs;
+          description = "The features and their configurations to enable with this profile.";
+          default = {};
         };
       };
     };  

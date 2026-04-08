@@ -25,10 +25,7 @@ in {
         profile = "personal";
 
         features = {
-          gaming = {
-            enable = false;
-            gpu.isAMD = true;
-          };
+          gaming.enable = false;
         };
 
         programs = {

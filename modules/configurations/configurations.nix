@@ -13,6 +13,7 @@ with lib;
       nix.settings.experimental-features = [ "nix-command" "flakes" ];
       nixpkgs.config.allowUnfree = true;
       nixpkgs.config.allowBroken = true;
+      programs.nix-ld.enable = true;
 
       services.xserver.videoDrivers = [ "nvidia" ];
       hardware = {

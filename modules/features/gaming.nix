@@ -10,7 +10,7 @@ in {
 
     config = {
       jovian = {
-        hardware.has.amd.gpu = cfg.gpu.isAMD;
+        hardware.has.amd.gpu = cfg.configurations.gpu.isAMD;
         # devices.gpd-win-max-2.enable = true;
         steam = {
           enable = true;
@@ -23,7 +23,7 @@ in {
   });
 
   flake.features.${name} = self.lib.mkFeature name ({ pkgs, ... }: {
-    options = {
+    configurations = {
       gpu.isAMD = mkOption {
         type = types.bool;
         description = "Whether the gpu is AMD or not.";
