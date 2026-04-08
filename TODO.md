@@ -7,7 +7,7 @@
 [] Development Feature
   [] Programming languages: Go, Java, Javascript, Rust and Python
   [] Docker
-[] Feature Gaming
+[*] Feature Gaming
   [*] Games and launchers
   [*] Discord
   [*] Jovian for GPD
@@ -16,4 +16,5 @@
 [*] Fix the nswitch, ntest, nbuid-vm, nclean and nshell
 [] Rewrite Neovim configurations with wrapper?
 [] Install atuin
-[] Apply the quality of life improvements from [here](https://nixos.wiki/wiki/Jovian_NixOS)
+[*] Apply the quality of life improvements from [here](https://nixos.wiki/wiki/Jovian_NixOS)
+[*] Avoid mouse hanging out after a few seconds 
