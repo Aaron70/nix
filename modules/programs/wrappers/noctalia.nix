@@ -265,7 +265,7 @@ in
             right = [
               {
                 deviceNativePath = "__default__";
-                displayMode = "graphic-clean";
+                displayMode = "icon-always";
                 hideIfIdle = false;
                 hideIfNotDetected = false;
                 id = "Battery";
