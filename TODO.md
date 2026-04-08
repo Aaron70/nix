@@ -1,7 +1,7 @@
 [] Gargabe Collection service
   [] Run nh clean periodically
   [] Works for Nixos, Darwin and HomeManager
-[] Cursor Theme
+[] Cursor Theme (Seems like it needs HomeManager)
 [] Darwing Configurations
 [] HomeManager Configurations
 [] Development Feature

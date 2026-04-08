@@ -27,7 +27,7 @@ in {
         features = {
           gaming = {
             enable = true;
-            gpu.isAMD = true;
+            configurations.gpu.isAMD = true;
           };
         };
 

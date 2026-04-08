@@ -42,12 +42,15 @@ with lib;
           description = "The programs and their configurations to enable with this feature.";
           default = {};
         };
+
         packages = mkOption {
           type = types.listOf types.package;
           description = "The list of packages to install with this feature.";
           default = [];
         };
-      } // (moduleEvaluated.options or {}));
+
+        configurations = moduleEvaluated.configurations or {};
+      });
 
       config = mkIf cfg.enable {
         preferences.features.${name} = moduleEvaluated.config or {};
