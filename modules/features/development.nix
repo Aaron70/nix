@@ -25,6 +25,8 @@ in {
     configurations = {
       docker.enable = mkEnableOption "Whether to enable docker.";
       go.enable = mkEnableOption "Whether to enable the Go programming language.";
+      rust.enable = mkEnableOption "Whether to enable the Rust programming language.";
+      python.enable = mkEnableOption "Whether to enable the Python programming language.";
       web.enable = mkEnableOption "Whether to enable the Web development ecosystem. (Js, Node, ...).";
     };
     config = {
@@ -36,12 +38,24 @@ in {
 
       packages = with pkgs; 
       let 
-        goPakcages = mkIf cfg.configurations.go.enable [
+        goPakcages = if cfg.configurations.go.enable then [
           go
           goperf
-        ];
+        ] else [];
+        rustPackages = if cfg.configurations.rust.enable then [
+          cargo
+          rustc
+        ] else [];
+        pythonPackages = if cfg.configurations.python.enable then [
+          (python3.withPackages (python-pkgs: with python-pkgs; [
+            pandas
+            requests
+          ]))
+        ] else [];
       in
-      goPakcages;
+      goPakcages ++
+      rustPackages ++
+      pythonPackages;
     };
   });
  }
