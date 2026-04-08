@@ -14,13 +14,6 @@ with lib;
       nixpkgs.config.allowUnfree = true;
       nixpkgs.config.allowBroken = true;
 
-      boot.loader.systemd-boot = {
-        enable = mkDefault true;
-        configurationLimit = mkDefault config.preferences.boot.configurationLimit;
-      };
-      boot.loader.efi.canTouchEfiVariables = true;
-      boot.kernelPackages = pkgs.linuxPackages_latest;
-
       services.xserver.videoDrivers = [ "nvidia" ];
       hardware = {
         graphics = {
