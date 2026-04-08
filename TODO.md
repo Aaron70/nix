@@ -6,7 +6,7 @@
 [] HomeManager Configurations
 [] Development Feature
   [] Programming languages: Go, Java, Javascript, Rust and Python
-  [] Docker
+  [*] Docker
 [*] Feature Gaming
   [*] Games and launchers
   [*] Discord
