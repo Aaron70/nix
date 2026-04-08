@@ -24,6 +24,10 @@ in {
       preferences = {
         profile = "personal";
 
+        features = {
+          gaming.enable = true;
+        };
+
         programs = {
           desktop = {
             enable = true;
@@ -47,10 +51,6 @@ in {
               };
             };
           };
-        };
-
-        features = {
-          gaming.enable = true;
         };
       };
     };
