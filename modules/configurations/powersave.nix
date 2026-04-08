@@ -5,6 +5,7 @@
     boot.kernelParams = [ "usbcore.autosuspend=500" "amd_pstate=active" ];
     services.power-profiles-daemon.enable = true;
     services.thermald.enable = true;
+    services.upower.enable = true;
     powerManagement.powertop.enable = true;
 
     # hardware.amdgpu.overdrive.enable = true;
