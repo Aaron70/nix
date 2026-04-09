@@ -18,6 +18,7 @@ in {
           daemon.settings = { };
         };
       };
+      programs.java.enable = cfg.configurations.java.enable;
     };
   });
 
@@ -25,15 +26,15 @@ in {
     configurations = {
       docker.enable = mkEnableOption "Whether to enable docker.";
       go.enable = mkEnableOption "Whether to enable the Go programming language.";
+      java.enable = mkEnableOption "Whether to enable the Java programming language.";
       rust.enable = mkEnableOption "Whether to enable the Rust programming language.";
       python.enable = mkEnableOption "Whether to enable the Python programming language.";
-      web.enable = mkEnableOption "Whether to enable the Web development ecosystem. (Js, Node, ...).";
+      node.enable = mkEnableOption "Whether to enable the Web development ecosystem. (Js, Node, ...).";
     };
     config = {
       configurations = {
         docker.enable = mkDefault true;
         go.enable = mkDefault true;
-        web.enable = mkDefault false;
       };
 
       packages = with pkgs; 
@@ -52,10 +53,14 @@ in {
             requests
           ]))
         ] else [];
+        nodejsPackages = if cfg.configurations.node.enable then [
+          nodejs
+        ] else [];
       in
       goPakcages ++
       rustPackages ++
-      pythonPackages;
+      pythonPackages ++
+      nodejsPackages;
     };
   });
  }
