@@ -4,8 +4,8 @@
 [] Cursor Theme (Seems like it needs HomeManager)
 [] Darwing Configurations
 [] HomeManager Configurations
-[] Development Feature
-  [] Programming languages: Go, Java, Javascript, Rust and Python
+[*] Development Feature
+  [*] Programming languages: Go, Java, Javascript, Rust and Python
   [*] Docker
 [*] Feature Gaming
   [*] Games and launchers
@@ -18,3 +18,4 @@
 [] Install atuin
 [*] Apply the quality of life improvements from [here](https://nixos.wiki/wiki/Jovian_NixOS)
 [*] Avoid mouse hanging out after a few seconds 
+[] Fix nix packages, can't be executed with `nix run` because of the crypted profiles 
