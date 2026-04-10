@@ -19,3 +19,4 @@
 [*] Apply the quality of life improvements from [here](https://nixos.wiki/wiki/Jovian_NixOS)
 [*] Avoid mouse hanging out after a few seconds 
 [] Fix nix packages, can't be executed with `nix run` because of the crypted profiles 
+
