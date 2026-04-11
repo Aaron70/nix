@@ -4,6 +4,7 @@ with lib;
 let
   name = "gaming";
 in {
+  flake.homeModules.features = self.lib.mkHomeFeature name ({ ... }: {});
 
   flake.nixosModules.features = self.lib.mkNixosFeature name ({ config, cfg, ... }: {
     imports = [ inputs.jovian.nixosModules.jovian ];

@@ -11,6 +11,24 @@ with lib;
   };
 
   config = {
+
+    flake.lib.mkHomeFeature = name: module: ({ pkgs, config, ... }@inputs: 
+    let
+      cfg = config.preferences.features.${name};
+      moduleEvaluated = (module (inputs // { inherit cfg; }));
+    in {
+      imports = ([
+        self.features.${name}
+      ] ++ (moduleEvaluated.imports or []));
+
+      options = (moduleEvaluated.options or {});
+
+      config = mkIf cfg.enable ({
+        preferences.programs = cfg.programs;
+        home.packages = cfg.packages;
+      } // (moduleEvaluated.config or {}));
+    });
+
     flake.lib.mkNixosFeature = name: module: ({ pkgs, config, ... }@inputs: 
     let
       cfg = config.preferences.features.${name};

@@ -5,6 +5,8 @@ let
   name = "development";
 in {
 
+  flake.homeModules.features = self.lib.mkHomeFeature name ({ ... }: {});
+
   flake.nixosModules.features = self.lib.mkNixosFeature name ({ cfg, config, ... }: {
     config = {
       # NOTE: Be aware of: https://github.com/moby/moby/issues/9976
