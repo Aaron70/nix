@@ -31,11 +31,6 @@ with lib;
             default = 3;
           };
         };
-
-        profile = mkOption {
-          type = types.str;
-          description = "The name of the profile to use";
-        };
       };
 
       options.information = {

@@ -4,6 +4,7 @@
 [*] Cursor Theme (Seems like it needs HomeManager, I don't know if its worth it)
 [] Darwing Configurations
 [] HomeManager Configurations
+[*] HomeManager Modules
 [*] Development Feature
   [*] Programming languages: Go, Java, Javascript, Rust and Python
   [*] Docker

@@ -4,6 +4,7 @@ with lib;
 let
   name = "zsh";
 in {
+  flake.homeModules.programs = self.lib.mkHomeProgram name ({ ... }: {});
 
   flake.nixosModules.programs = self.lib.mkNixosProgram name ({ ... }: {});
 

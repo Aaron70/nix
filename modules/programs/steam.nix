@@ -4,6 +4,8 @@ with lib;
 let
   name = "steam";
 in {
+  flake.homeModules.programs = self.lib.mkHomeProgram name ({ ... }: {});
+
   flake.nixosModules.programs = self.lib.mkNixosProgram name ({ pkgs, ... }: {
     config = {
       environment.sessionVariables = {

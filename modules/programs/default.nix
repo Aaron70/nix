@@ -31,6 +31,22 @@ with lib;
       } // (moduleEvaluated.config or {}));
     });
 
+    flake.lib.mkHomeProgram = name: module: ({ pkgs, config, ... }@inputs: 
+    let
+      cfg = config.preferences.programs.${name};
+      moduleEvaluated = (module (inputs // { inherit cfg; }));
+    in {
+      imports = ([
+        self.programs.${name}
+      ] ++ (moduleEvaluated.imports or []));
+
+      options = (moduleEvaluated.options or {});
+
+      config = mkIf cfg.enable ({
+        home.packages = mkIf (cfg.package != null) [ cfg.package ];
+      } // (moduleEvaluated.config or {}));
+    });
+
     flake.lib.mkProgram = name: module: ({ pkgs, config, ... }@inputs: 
     let
       cfg = config.preferences.programs.${name};

@@ -16,10 +16,16 @@ with lib;
       profiles.nixos = inputs.nixpkgs.lib.mkOption {
         default = {};
       };
+
+      profiles.home = inputs.nixpkgs.lib.mkOption {
+        default = {};
+      };
     };
   };
 
-  config = {
+  config = rec {
+
+    flake.lib.mkHomeProfile = flake.lib.mkNixosProfile; 
 
     flake.lib.mkNixosProfile = profile: preferences: ({ config, pkgs, ... }@inputs: {
       config = mkIf (config.preferences.profile == profile) ({
@@ -40,8 +46,21 @@ with lib;
       ] ++ builtins.attrValues self.profiles.nixos;
     };
 
+    flake.homeModules.profile = { ... }: {
+      imports = [ 
+        self.profile.module
+      ] ++ builtins.attrValues self.profiles.home;
+    };
+
     flake.profile.module = { ... }: {
       imports = builtins.attrValues self.profiles.generic;
+
+      options.preferences = {
+        profile = mkOption {
+          type = types.str;
+          description = "The name of the profile to use";
+        };
+      };
 
       options.profile = {
         user = {

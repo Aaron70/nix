@@ -5,6 +5,8 @@ let
   name = "desktop";
   desktop = "niri";
 in {
+  flake.homeModules.programs = self.lib.mkHomeProgram name ({ ... }: {});
+
   flake.nixosModules.programs = self.lib.mkNixosProgram name ({ pkgs, cfg, ... }: {
     config = {
       preferences.programs.terminal.enable = mkDefault true;

@@ -5,6 +5,7 @@ let
   name = "shell";
   shell = "zsh";
 in {
+  flake.homeModules.programs = self.lib.mkHomeProgram name ({ ... }: {});
 
   flake.nixosModules.programs = self.lib.mkNixosProgram name ({ config, cfg, ... }: let
     shellPackage = cfg.package; 

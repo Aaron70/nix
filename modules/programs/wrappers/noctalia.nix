@@ -4,7 +4,10 @@ let
   name = "noctalia";
 in
 { 
+  flake.homeModules.programs = self.lib.mkHomeProgram name ({ ... }: {});
+
   flake.nixosModules.programs = self.lib.mkNixosProgram name ({ ... }: {});
+
   flake.programs.${name} = self.lib.mkProgram name ({ ... }: {});
 
   flake.wrappers.${name} = { wlib, pkgs, ... }:
