@@ -4,6 +4,7 @@ with lib;
 let
   name = "development";
 in {
+  flake.darwinModules.features = self.lib.mkDarwinFeature name ({ ... }: {});
 
   flake.homeModules.features = self.lib.mkHomeFeature name ({ ... }: {});
 

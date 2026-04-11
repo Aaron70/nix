@@ -5,6 +5,8 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     home-manager.url = "github:nix-community/home-manager/master";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    nix-darwin.url = "github:nix-darwin/nix-darwin/master";
+    nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
 
     flake-parts.url = "github:hercules-ci/flake-parts";
     flake-parts.inputs.nixpkgs-lib.follows = "nixpkgs";
@@ -27,6 +29,7 @@
       inputs.wrappers.flakeModules.wrappers
       inputs.flake-parts.flakeModules.modules
       inputs.home-manager.flakeModules.home-manager
+      inputs.nix-darwin.flakeModules.default
     ];
   };
 }

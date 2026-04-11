@@ -20,11 +20,16 @@ with lib;
       profiles.home = inputs.nixpkgs.lib.mkOption {
         default = {};
       };
+
+      profiles.darwin = inputs.nixpkgs.lib.mkOption {
+        default = {};
+      };
     };
   };
 
   config = rec {
 
+    flake.lib.mkDarwinProfile = flake.lib.mkNixosProfile; 
     flake.lib.mkHomeProfile = flake.lib.mkNixosProfile; 
 
     flake.lib.mkNixosProfile = profile: preferences: ({ config, pkgs, ... }@inputs: {
@@ -50,6 +55,12 @@ with lib;
       imports = [ 
         self.profile.module
       ] ++ builtins.attrValues self.profiles.home;
+    };
+
+    flake.darwinModules.profile = { ... }: {
+      imports = [ 
+        self.profile.module
+      ] ++ builtins.attrValues self.profiles.darwin;
     };
 
     flake.profile.module = { ... }: {
