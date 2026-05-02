@@ -40,5 +40,8 @@ in {
 
   flake.programs.${name} = self.lib.mkProgram name ({ ... }: {
     configurations = [ self.definitions.programs.terminal ];
+    config = {
+      package = null;
+    };
   });
 }

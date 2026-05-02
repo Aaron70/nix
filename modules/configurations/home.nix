@@ -15,8 +15,8 @@ with lib;
           self.homeModules.features
         ];
         config = {
-          preferences.profile = config.preferences.profile;
-          preferences.programs = config.preferences.programs;
+          preferences.profile = mkDefault config.preferences.profile;
+          preferences.programs = mkDefault config.preferences.programs;
           programs.home-manager.enable = true;
           home = {
             username = config.profile.user.username;
@@ -41,7 +41,7 @@ with lib;
           self.homeModules.features
         ];
         config = {
-          preferences.profile = config.preferences.profile;
+          preferences.profile = mkDefault config.preferences.profile;
           preferences.programs = mkDefault config.preferences.programs;
           programs.home-manager.enable = true;
           home = {
