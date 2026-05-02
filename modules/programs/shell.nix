@@ -37,7 +37,7 @@ in {
 
   flake.homeModules.programs = self.lib.mkHomeProgram name ({ ... }: {});
 
-  flake.nixosModules.programs = self.lib.mkNixosProgram name ({ config, cfg, ... }: let
+  flake.nixosModules.programs = self.lib.mkNixosProgram name ({ config, cfg, pkgs, ... }: let
     shellPackage = cfg.package; 
   in {
     config = {
@@ -47,7 +47,7 @@ in {
       users.defaultUserShell = shellPackage;
       users.users.${config.profile.user.username}.shell = shellPackage;
 
-      environment.systemPackages = [
+      environment.systemPackages = with pkgs; [
         wl-clipboard
       ] ++ cfg.configurations.packages;
 
