@@ -5,7 +5,14 @@ in {
 
   flake.homeModules.programs = self.lib.mkHomeProgram name ({...}: {});
 
-  flake.nixosModules.programs = self.lib.mkNixosProgram name ({...}: {});
+  flake.nixosModules.programs = self.lib.mkNixosProgram name ({...}: {
+    config = {
+      environment.variables = {
+        __NV_PRIME_RENDER_OFFLOAD=0;
+        __GLX_VENDOR_LIBRARY_NAME="mesa";
+      };
+    };
+  });
 
   flake.programs.${name} = self.lib.mkProgram name ({...}: {});
 
@@ -14,7 +21,10 @@ in {
     pkgs,
     ...
   }: {
-    imports = [wlib.wrapperModules.noctalia-shell];
+    imports = [
+      (self.lib.mkConfigurationsOption [])
+      wlib.wrapperModules.noctalia-shell
+    ];
 
     config = let
       noctalia-plugins = pkgs.fetchgit {

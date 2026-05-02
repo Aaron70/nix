@@ -7,6 +7,7 @@
 with lib; let
   name = "desktop";
   desktop = "niri";
+  bar = "noctalia";
 in {
   flake.darwinModules.programs = self.lib.mkDarwinProgram name ({...}: {});
 
@@ -19,6 +20,7 @@ in {
   }: {
     config = {
       preferences.programs.terminal.enable = mkDefault true;
+      preferences.programs.${bar}.enable = mkDefault true;
       services.displayManager.gdm.enable = true;
       programs.${desktop} = {
         enable = true;
@@ -143,12 +145,12 @@ in {
     };
 
     config = let
-      noctalia-shell = self.wrappers.noctalia.wrap {inherit pkgs;};
+      bar-shell = self.wrappers.${bar}.wrap {inherit pkgs;};
     in rec {
       terminal = mkDefault (self.wrappers.terminal.wrap {inherit pkgs;});
       browser = mkDefault inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default;
-      desktopShell = mkDefault noctalia-shell;
-      appLauncher = mkDefault (pkgs.writeShellScriptBin "launcher" "${getExe noctalia-shell} ipc call launcher toggle");
+      desktopShell = mkDefault bar-shell;
+      appLauncher = mkDefault (pkgs.writeShellScriptBin "launcher" "${getExe bar-shell} ipc call launcher toggle");
       packages = with pkgs;
         mkDefault [
           # Wrappers
