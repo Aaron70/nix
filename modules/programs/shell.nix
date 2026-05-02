@@ -27,11 +27,11 @@ in {
         GIT_AUTHOR_EMAIL = config.profile.user.email;
         GIT_COMMITER_NAME = GIT_AUTHOR_NAME;
         GIT_COMMITER_EMAIL = GIT_AUTHOR_EMAIL;
-        NH_FLAKE = "/home/${config.profile.user.username}/nix";
+        NH_FLAKE = "/Users/${config.profile.user.username}/nix";
       };
 
       environment.shellAliases = let
-        homePath = "/home/${config.profile.user.username}/nix";
+        homePath = "/Users/${config.profile.user.username}/nix";
       in {
         # ntest = "nh os test ${homePath} -H ${config.information.hostname}";
         nswitch = "nh darwin switch ${homePath} -H ${config.information.hostname}";
