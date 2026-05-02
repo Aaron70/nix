@@ -35,7 +35,7 @@ in {
               modKey = "alt";
               modKeyAlt = "super";
               monitors = rec {
-                DP-3 = {
+                DP-1 = {
                   enabled = true; primary = true;
                   x = 0; y = 0;
                   width = 1920; height = 1080;

@@ -33,7 +33,7 @@ in {
             enable = true;
             configurations = {
               monitors = {
-                DP-3 = {
+                DP-1 = {
                   enabled = true;
                   primary = true;
                   x = 0; y = 0;
