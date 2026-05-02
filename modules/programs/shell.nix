@@ -27,6 +27,7 @@ in {
         GIT_COMMITER_NAME = GIT_AUTHOR_NAME;
         GIT_COMMITER_EMAIL = GIT_AUTHOR_EMAIL;
         NH_FLAKE = "/home/${config.profile.user.username}/nix";
+        CD_FZF_EXTRA_PATS = "~/personal/development:3 ~/personal/repos:2";
       };
 
       environment.shellAliases = let
@@ -82,7 +83,7 @@ in {
           ls = "eza";
           find = "fd";
           cd = ". cdfzf";
-          nshell = "nix-shell -p";
+          nshell = "nix-shell --command zsh -p";
         };
       };
 
