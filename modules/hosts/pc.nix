@@ -57,6 +57,7 @@ in {
                   height = 1440;
                   refreshRate = 74.932;
                 };
+                HDMI-A-2 = HDMI-A-1;
               };
             };
           };

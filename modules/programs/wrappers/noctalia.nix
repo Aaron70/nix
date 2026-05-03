@@ -1,4 +1,8 @@
-{self, ...}: let
+{
+  inputs,
+  self,
+  ...
+}: let
   name = "noctalia";
 in {
   flake.darwinModules.programs = self.lib.mkDarwinProgram name ({...}: {});
@@ -8,8 +12,8 @@ in {
   flake.nixosModules.programs = self.lib.mkNixosProgram name ({...}: {
     config = {
       environment.variables = {
-        __NV_PRIME_RENDER_OFFLOAD=0;
-        __GLX_VENDOR_LIBRARY_NAME="mesa";
+        __NV_PRIME_RENDER_OFFLOAD = 0;
+        __GLX_VENDOR_LIBRARY_NAME = "mesa";
       };
     };
   });
@@ -38,6 +42,7 @@ in {
         ];
       };
     in {
+      package = inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default;
       extraPackages = with pkgs; [
         # Dependencies for Screen Recorder plugin: https://noctalia.dev/plugins/screen-recorder/
         gpu-screen-recorder
