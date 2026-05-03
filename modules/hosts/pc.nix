@@ -35,7 +35,7 @@ in {
           desktop = {
             enable = true;
             configurations = {
-              monitors = {
+              monitors = rec {
                 DP-1 = {
                   enabled = true;
                   primary = true;
@@ -45,6 +45,8 @@ in {
                   height = 1080;
                   refreshRate = 143.981;
                 };
+                DP-2 = DP-1;
+                DP-3 = DP-1;
 
                 HDMI-A-1 = rec {
                   enabled = true;
