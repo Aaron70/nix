@@ -80,6 +80,10 @@ in {
         bind-key -r f run-shell "sessions"
         bind-key -r l run-shell "toggle-tmux-popup"
         bind-key -r g run-shell 'tmux popup -E -d "#{pane_current_path}" -w "90%" -h "90%" -T "LazyGit" "lazygit"'
+
+        set -gq allow-passthrough on
+        set -g visual-activity off
+        set-option -g focus-events on
       '';
     };
   };
