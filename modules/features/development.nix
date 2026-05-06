@@ -81,11 +81,19 @@ in {
             nodejs
           ]
           else [];
+        javaPackages =
+          if cfg.configurations.java.enable
+          then [
+            jdk21
+            gradle
+          ]
+          else [];
       in
         goPakcages
         ++ rustPackages
         ++ pythonPackages
-        ++ nodejsPackages;
+        ++ nodejsPackages
+        ++ javaPackages;
     };
   });
 }
