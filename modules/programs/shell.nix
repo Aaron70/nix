@@ -70,7 +70,7 @@ in {
         GIT_COMMITER_NAME = GIT_AUTHOR_NAME;
         GIT_COMMITER_EMAIL = GIT_AUTHOR_EMAIL;
         NH_FLAKE = "/home/${config.profile.user.username}/nix";
-        CD_FZF_EXTRA_PATS = "~/personal/development:3 ~/personal/repos:2";
+        CD_FZF_EXTRA_PATHS = "~/personal/development:3 ~/personal/repos:2";
       };
 
       environment.shellAliases = let
