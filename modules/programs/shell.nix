@@ -197,7 +197,6 @@ in {
 
         # Wrapped
         inputs.nvim.packages.${pkgs.stdenv.hostPlatform.system}.neovim
-        inputs.herdr.packages.${pkgs.stdenv.hostPlatform.system}.herdr
 
         # Scripts
         (writeShellScriptBin "hydrate-paths" (readFile ./scripts/hydrate-paths.sh))
