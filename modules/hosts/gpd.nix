@@ -41,28 +41,31 @@ in {
                 HDMI-A-1 = {
                   enabled = true;
                   primary = true;
-                  x = 0;
-                  y = 0;
+                  x = 2560;
+                  y = 140;
                   width = 1920;
                   height = 1080;
                   refreshRate = 143.981;
                 };
+                HDMI-A-2 = HDMI-A-1;
 
-                DP-1 = rec {
+                DP-1 = {
                   enabled = true;
                   primary = false;
-                  x = -width;
+                  x = 0;
                   y = 0;
                   width = 2560;
                   height = 1440;
                   refreshRate = 74.932;
                 };
+                DP-2 = DP-1;
+                DP-3 = DP-1;
 
                 eDP-1 = {
                   enabled = true;
                   primary = false;
-                  x = DP-1.x;
-                  y = 800;
+                  x = 629;
+                  y = 1440;
                   width = 2560;
                   height = 1600;
                   refreshRate = 60.009;

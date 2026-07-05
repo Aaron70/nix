@@ -39,6 +39,7 @@ in {
           vlc # Videos
           shotwell # Images
           mission-center
+          wdisplays
         ]
         ++ cfg.configurations.packages;
     };

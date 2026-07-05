@@ -31,3 +31,8 @@ Get the commit has from the latest commit on the [Plugins Repository](https://gi
 
 Open `pavucontrol` or `Bluetooth Manager` and change the audio profile. Currently is working with `High Fidelity Playback (A2DP Sink, codec AAC)`.
 
+### Setup the monitors position
+
+For setting up the monitors position, `wdisplays` is intalled, you can set the positions within the application and then copy the values shown in the application into the nix configuration.
+
+
