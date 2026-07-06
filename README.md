@@ -35,4 +35,7 @@ Open `pavucontrol` or `Bluetooth Manager` and change the audio profile. Currentl
 
 For setting up the monitors position, `wdisplays` is intalled, you can set the positions within the application and then copy the values shown in the application into the nix configuration.
 
+### Git Credentials broken
 
+If Nixos rebuilds `gh` then the configuration for git Credentials might get broken, since it might be still pointing to the old path of `gh`.
+To fix it just run the command `gh auth setup-git`
