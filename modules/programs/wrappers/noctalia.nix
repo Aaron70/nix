@@ -7,7 +7,12 @@
 in {
   flake.darwinModules.programs = self.lib.mkDarwinProgram name ({...}: {});
 
-  flake.homeModules.programs = self.lib.mkHomeProgram name ({...}: {});
+  flake.homeModules.programs = self.lib.mkHomeProgram name ({...}: {
+    config = {
+      # TODO: Look if this configuration can be applied trough the wrapper using Noctalia v5
+      xdg.configFile."noctalia/config.toml".text = self.wrapperHelpers.noctalia.config.default {};
+    };
+  });
 
   flake.nixosModules.programs = self.lib.mkNixosProgram name ({...}: {
     config = {
