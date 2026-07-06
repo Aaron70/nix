@@ -166,10 +166,13 @@ in {
           }
         }
 
-        // Set the overview wallpaper on the backdrop.
         layer-rule {
-          match namespace="^noctalia-overview*"
-          place-within-backdrop true
+          match namespace="^noctalia-(bar-[^\"]+|notification|dock|panel|attached-panel|osd)$"
+          // place-within-backdrop true
+          background-effect {
+            xray false
+            blur false
+          }
         }
 
         animations {

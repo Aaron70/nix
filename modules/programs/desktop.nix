@@ -151,7 +151,7 @@ in {
       terminal = mkDefault (self.wrappers.terminal.wrap {inherit pkgs;});
       browser = mkDefault inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default;
       desktopShell = mkDefault bar-shell;
-      appLauncher = mkDefault (pkgs.writeShellScriptBin "launcher" "${getExe bar-shell} ipc call launcher toggle");
+      appLauncher = mkDefault (pkgs.writeShellScriptBin "app-launcher" "${getExe bar-shell} msg panel-toggle launcher");
       packages = with pkgs;
         mkDefault [
           # Wrappers
