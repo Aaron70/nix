@@ -142,7 +142,7 @@ in {
           ls = "eza";
           find = "fd";
           cd = ". cdfzf";
-          nshell = "nix-shell --command zsh -p";
+          nshell = "NIXPKGS_ALLOW_UNFREE=1 nix-shell --command zsh -p";
         };
       };
 
