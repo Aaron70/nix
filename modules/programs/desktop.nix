@@ -36,6 +36,7 @@ in {
           spotify
 
           # Essentials
+          nautilus # File browser
           vlc # Videos
           shotwell # Images
           mission-center
