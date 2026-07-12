@@ -11,7 +11,17 @@ with lib; let
 in {
   flake.darwinModules.programs = self.lib.mkDarwinProgram name ({...}: {});
 
-  flake.homeModules.programs = self.lib.mkHomeProgram name ({...}: {});
+  flake.homeModules.programs = self.lib.mkHomeProgram name ({...}: {
+    config = {
+      dconf = {
+        enable = true;
+        settings."org/gnome/desktop/interface".color-scheme = "prefer-dark";
+      };
+      services.udiskie = {
+        enable = true;
+      };
+    };
+  });
 
   flake.nixosModules.programs = self.lib.mkNixosProgram name ({
     pkgs,
@@ -19,6 +29,8 @@ in {
     ...
   }: {
     config = {
+      services.gvfs.enable = true;
+      services.udisks2.enable = true;
       preferences.programs.terminal.enable = mkDefault true;
       preferences.programs.${bar}.enable = mkDefault true;
       services.displayManager.gdm.enable = true;
