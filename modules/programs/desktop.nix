@@ -53,6 +53,7 @@ in {
           shotwell # Images
           mission-center
           wdisplays
+          xdg-desktop-portal-gnome
         ]
         ++ cfg.configurations.packages;
     };

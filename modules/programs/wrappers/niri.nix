@@ -210,6 +210,44 @@ in {
           }
         }
 
+        // Block out password managers from screencasts.
+        window-rule {
+            match app-id=r#"^org\.keepassxc\.KeePassXC$"#
+            match app-id=r#"^org\.gnome\.World\.Secrets$"#
+            match title=r#"(?i)bit(-)?warden"#
+        
+            block-out-from "screencast"
+        }
+
+        // Indicate screencasted windows with red colors.
+        window-rule {
+            match is-window-cast-target=true
+        
+            focus-ring {
+                active-color "#f38ba8"
+                inactive-color "#7d0d2d"
+            }
+        
+            border {
+                inactive-color "#7d0d2d"
+            }
+        
+            shadow {
+                color "#7d0d2d70"
+            }
+        
+            tab-indicator {
+                active-color "#f38ba8"
+                inactive-color "#7d0d2d"
+            }
+        }
+
+        // Steam notifications
+        window-rule {
+            match app-id="steam" title=r#"^notificationtoasts_\d+_desktop$"#
+            default-floating-position x=10 y=10 relative-to="bottom-right"
+        }
+
 
 
         // ==================== | Layer Rules | ====================
@@ -404,6 +442,10 @@ in {
           Ctrl+Shift+3 { screenshot-screen; }
           Ctrl+Shift+5 { screenshot-window; }
           Ctrl+Shift+4 { screenshot; }
+
+          Mod+Ctrl+Shift+W { set-dynamic-cast-window; }
+          Mod+Ctrl+Shift+M { set-dynamic-cast-monitor; }
+          Mod+Ctrl+Shift+C { clear-dynamic-cast-target; }
         }
       '';
     };
