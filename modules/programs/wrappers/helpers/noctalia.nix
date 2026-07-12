@@ -79,7 +79,7 @@ enabled = true
     type = "google"
 
 [control_center]
-hidden_tabs = [ "weather" ]
+hidden_tabs = []
 
     [[control_center.shortcuts]]
     type = "caffeine"
@@ -131,20 +131,50 @@ behavior_order = [ "lock", "screen-off", "lock-and-suspend" ]
     enabled = true
     timeout = 660.0
 
+[location]
+auto_locate = true
+
 [lockscreen]
 blur_intensity = 0.64999998547136784
 blurred_desktop = true
-tint_intensity = 0.19999999552965164
+tint_intensity = 0.39999999105930328
 
 [lockscreen_widgets]
 enabled = true
 schema_version = 2
-widget_order = [ "lockscreen-login-box@eDP-1", "lockscreen-widget-0000000000000006", "lockscreen-widget-0000000000000003" ]
+widget_order = [
+    "lockscreen-login-box@HDMI-A-2",
+    "lockscreen-login-box@DP-3",
+    "lockscreen-login-box@HDMI-A-1",
+    "lockscreen-login-box@DP-1",
+    "lockscreen-widget-0000000000000001",
+    "lockscreen-widget-0000000000000002"
+]
 
     [lockscreen_widgets.grid]
     cell_size = 16
     major_interval = 4
     visible = true
+
+    [lockscreen_widgets.widget."lockscreen-login-box@DP-1"]
+    box_height = 70.0
+    box_width = 400.0
+    cx = 960.0
+    cy = 961.0
+    output = "DP-1"
+    rotation = 0.0
+    type = "login_box"
+
+        [lockscreen_widgets.widget."lockscreen-login-box@DP-1".settings]
+        background_color = "surface_variant"
+        background_opacity = 0.88
+        background_radius = 12.0
+        input_opacity = 1.0
+        input_radius = 6.0
+        show_caps_lock = true
+        show_keyboard_layout = true
+        show_login_button = true
+        show_password_hint = true
 
     [lockscreen_widgets.widget."lockscreen-login-box@DP-2"]
     box_height = 70.0
@@ -166,16 +196,56 @@ widget_order = [ "lockscreen-login-box@eDP-1", "lockscreen-widget-00000000000000
         show_login_button = true
         show_password_hint = true
 
-    [lockscreen_widgets.widget."lockscreen-login-box@HDMI-A-1"]
+    [lockscreen_widgets.widget."lockscreen-login-box@DP-3"]
     box_height = 70.0
     box_width = 400.0
     cx = 960.0
     cy = 961.0
+    output = "DP-3"
+    rotation = 0.0
+    type = "login_box"
+
+        [lockscreen_widgets.widget."lockscreen-login-box@DP-3".settings]
+        background_color = "surface_variant"
+        background_opacity = 0.88
+        background_radius = 12.0
+        input_opacity = 1.0
+        input_radius = 6.0
+        show_caps_lock = true
+        show_keyboard_layout = true
+        show_login_button = true
+        show_password_hint = true
+
+    [lockscreen_widgets.widget."lockscreen-login-box@HDMI-A-1"]
+    box_height = 70.0
+    box_width = 400.0
+    cx = 1280.0
+    cy = 1321.0
     output = "HDMI-A-1"
     rotation = 0.0
     type = "login_box"
 
         [lockscreen_widgets.widget."lockscreen-login-box@HDMI-A-1".settings]
+        background_color = "surface_variant"
+        background_opacity = 0.88
+        background_radius = 12.0
+        input_opacity = 1.0
+        input_radius = 6.0
+        show_caps_lock = true
+        show_keyboard_layout = true
+        show_login_button = true
+        show_password_hint = true
+
+    [lockscreen_widgets.widget."lockscreen-login-box@HDMI-A-2"]
+    box_height = 70.0
+    box_width = 400.0
+    cx = 1280.0
+    cy = 1321.0
+    output = "HDMI-A-2"
+    rotation = 0.0
+    type = "login_box"
+
+        [lockscreen_widgets.widget."lockscreen-login-box@HDMI-A-2".settings]
         background_color = "surface_variant"
         background_opacity = 0.88
         background_radius = 12.0
@@ -205,6 +275,34 @@ widget_order = [ "lockscreen-login-box@eDP-1", "lockscreen-widget-00000000000000
         show_keyboard_layout = true
         show_login_button = true
         show_password_hint = true
+
+    [lockscreen_widgets.widget.lockscreen-widget-0000000000000001]
+    box_height = 0.0
+    box_width = 0.0
+    cx = 960.0
+    cy = 156.0
+    output = "DP-3"
+    rotation = 0.0
+    type = "clock"
+
+        [lockscreen_widgets.widget.lockscreen-widget-0000000000000001.settings]
+        background = false
+        center_text = true
+        shadow = false
+
+    [lockscreen_widgets.widget.lockscreen-widget-0000000000000002]
+    box_height = 0.0
+    box_width = 0.0
+    cx = 960.0
+    cy = 802.0
+    output = "DP-3"
+    rotation = 0.0
+    type = "media_player"
+
+        [lockscreen_widgets.widget.lockscreen-widget-0000000000000002.settings]
+        background = false
+        hide_when_no_media = true
+        shadow = false
 
     [lockscreen_widgets.widget.lockscreen-widget-0000000000000003]
     box_height = 0.0
@@ -240,6 +338,7 @@ widget_order = [ "lockscreen-login-box@eDP-1", "lockscreen-widget-00000000000000
 
 [nightlight]
 enabled = true
+temperature_night = 3800
 
 [osd]
 background_opacity = 0.74999998323619366
@@ -261,12 +360,14 @@ telemetry_enabled = true
     [shell.launcher]
     app_grid = true
     compact = true
+    session_search = true
 
     [shell.panel]
     control_center_placement = "floating"
     open_near_click_control_center = true
     session_placement = "floating"
     session_position = "center"
+    wallpaper_placement = "floating"
 
     [shell.screen_corners]
     enabled = true
@@ -327,13 +428,19 @@ transition_on_startup = true
     enabled = false
 
     [wallpaper.default]
-    path = "${wallpapersPath}/gta-beach.png"
+    path = "${wallpapersPath}/wallhaven.jpg"
 
     [wallpaper.last]
-    path = "${wallpapersPath}/gta-beach.png"
+    path = "${wallpapersPath}/wallhaven.jpg"
+
+    [wallpaper.monitors.DP-1]
+    path = "${wallpapersPath}/wallhaven.jpg"
+
+    [wallpaper.monitors.HDMI-A-1]
+    path = "${wallpapersPath}/wallhaven.jpg"
 
     [wallpaper.monitors.eDP-1]
-    path = "${wallpapersPath}/gta-beach.png"
+    path = "${wallpapersPath}/wallhaven.jpg"
 
 [widget.control-center]
 glyph = "brand-dribbble-filled"
@@ -356,6 +463,6 @@ type = "noctalia/screen_recorder:recorder"
 display = "none"
 hide_when_empty = true
 pill_scale = 0.75
-'';
+    '';
   };
 }
