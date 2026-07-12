@@ -92,6 +92,16 @@ with lib; {
       };
       # one of "ignore", "poweroff", "reboot", "halt", "kexec", "suspend", "hibernate", "hybrid-sleep", "suspend-then-hibernate", "lock"
 
+      # Faster rebuilding
+      documentation = {
+        enable = true;
+        doc.enable = false;
+        man.enable = true;
+        dev.enable = false;
+        info.enable = false;
+        nixos.enable = false;
+      };
+
       system.stateVersion = config.preferences.stateVersion;
     };
   };

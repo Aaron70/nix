@@ -17,6 +17,7 @@ in {
     ];
 
     config = {
+      boot.kernelParams = ["mem_sleep_default=s2idle"]; # NOTE: Fixes issue when trying to resume from a suspend it stucks on a black screen
       information = {
         hostname = "pc";
         isLaptop = false;
