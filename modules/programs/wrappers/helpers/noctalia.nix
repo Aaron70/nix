@@ -9,7 +9,8 @@
 enable_sounds = true
 
 [backdrop]
-blur_intensity = 0.0
+blur_intensity = 0.4999999888241291
+enabled = true
 tint_intensity = 0.0
 
 [bar]
@@ -137,7 +138,7 @@ auto_locate = true
 [lockscreen]
 blur_intensity = 0.64999998547136784
 blurred_desktop = true
-tint_intensity = 0.39999999105930328
+tint_intensity = 0.19999999552965164
 
 [lockscreen_widgets]
 enabled = true
@@ -276,6 +277,26 @@ widget_order = [
         show_login_button = true
         show_password_hint = true
 
+    [lockscreen_widgets.widget."lockscreen-login-box@winit"]
+    box_height = 70.0
+    box_width = 400.0
+    cx = 466.0
+    cy = 913.0
+    output = "winit"
+    rotation = 0.0
+    type = "login_box"
+
+        [lockscreen_widgets.widget."lockscreen-login-box@winit".settings]
+        background_color = "surface_variant"
+        background_opacity = 0.88
+        background_radius = 12.0
+        input_opacity = 1.0
+        input_radius = 6.0
+        show_caps_lock = true
+        show_keyboard_layout = true
+        show_login_button = true
+        show_password_hint = true
+
     [lockscreen_widgets.widget.lockscreen-widget-0000000000000001]
     box_height = 0.0
     box_width = 0.0
@@ -365,8 +386,9 @@ telemetry_enabled = true
     [shell.panel]
     control_center_placement = "floating"
     open_near_click_control_center = true
+    open_near_click_session = true
     session_placement = "floating"
-    session_position = "center"
+    session_position = "auto"
     wallpaper_placement = "floating"
 
     [shell.screen_corners]

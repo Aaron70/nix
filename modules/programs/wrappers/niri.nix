@@ -71,9 +71,13 @@ in {
           )
           config.configurations.monitors);
       in ''
+        // ==================== | Launch apps | ====================
         spawn-at-startup "xwayland-satellite"
         spawn-at-startup "${getExe config.configurations.desktopShell}"
 
+
+
+        // ==================== | Miscellaneous | ====================
         screenshot-path "~/Pictures/Screenshots/Screenshot_%Y-%m-%d_%H-%M-%S.png"
         prefer-no-csd
         hotkey-overlay {
@@ -85,6 +89,14 @@ in {
           ELECTRON_OZONE_PLATFORM_HINT "auto"
         }
 
+        debug {
+          // Allows notification actions and window activation from Noctalia.
+          honor-xdg-activation-with-invalid-serial
+        }
+
+
+
+        // ==================== | Input | ====================
         cursor {
           // xcursor-theme ""
           // xcursor-size
@@ -119,6 +131,9 @@ in {
           }
         }
 
+
+
+        // ==================== | Layout | ====================
         layout {
           gaps 5
           center-focused-column "on-overflow"
@@ -166,13 +181,67 @@ in {
           }
         }
 
+
+
+        // ==================== | Window Rules | ====================
+        window-rule {
+          open-maximized true
+          geometry-corner-radius 3
+          clip-to-geometry true
+
+          draw-border-with-background false
+          opacity 0.75
+          variable-refresh-rate true
+
+          background-effect {
+            blur true
+            xray false
+          }
+        }
+
+        // Remove transparency from windows with videos
+        window-rule {
+          match title=r#"(?i)youtube"#
+          opacity 1.0
+          background-effect {
+            blur false
+            xray false
+          }
+        }
+
+
+
+        // ==================== | Layer Rules | ====================
+        // Noctalia backgroun on overview mode
+        layer-rule {
+          match namespace="^noctalia-backdrop"
+          place-within-backdrop true
+        }
+        
         layer-rule {
           match namespace="^noctalia-(bar-[^\"]+|notification|dock|panel|attached-panel|osd)$"
-          // place-within-backdrop true
+
           background-effect {
             xray false
             blur false
           }
+
+          popups {
+            opacity 1.0
+            // geometry-corner-radius 15
+
+            background-effect {
+                xray false
+                blur false
+            }
+          }
+        }
+
+        blur {
+          passes 3        // more passes = stronger blur (default: 3)
+          offset 3.0      // sample distance per pass (default: 3.0)
+          noise 0.03      // grain overlay (default: 0.02)
+          saturation 1.5  // color saturation boost (default: 1.5)
         }
 
         animations {
@@ -182,6 +251,9 @@ in {
           }
         }
 
+
+
+        // ==================== | Workspaces | ====================
         spawn-at-startup "${terminal}"
         workspace "terminal"
         window-rule {
@@ -220,28 +292,13 @@ in {
 
         workspace "temporal"
 
-        window-rule {
-          // By default maximized
-          // open-maximized true
 
-          // Rounded corners for a modern look.
-          geometry-corner-radius 3
-
-          // Clips window contents to the rounded corner boundaries.
-          clip-to-geometry true
-
-          draw-border-with-background false
-          opacity 0.95
-          variable-refresh-rate true
-        }
-
+        // ==================== | Monitors | ====================
         ${monitorConfigurations}
 
-        debug {
-          // Allows notification actions and window activation from Noctalia.
-          honor-xdg-activation-with-invalid-serial
-        }
 
+
+        // ==================== | Bindings | ====================
         binds {
           // Powers off the monitors. To turn them back on, do any input like
           // moving the mouse or pressing any other key.
@@ -253,8 +310,8 @@ in {
           Mod+X repeat=false hotkey-overlay-title="Closes the focused window" { close-window; }
           Mod+D hotkey-overlay-title="Run the Application Launcher: ${appLauncher}" { spawn "${appLauncher}"; }
 
-          // "-l 1.0" limits the volume to 100%.
-          XF86AudioRaiseVolume allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.05+ -l 1.0"; }
+          
+          XF86AudioRaiseVolume allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.05+ -l 1.0"; } // "-l 1.0" limits the volume to 100%.
           XF86AudioLowerVolume allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.05-"; }
           XF86AudioMute        allow-when-locked=true { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"; }
           XF86AudioMicMute     allow-when-locked=true { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"; }
