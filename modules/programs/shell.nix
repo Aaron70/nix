@@ -187,6 +187,7 @@ in {
         git
         git-crypt
         imgcat
+        jq
         lazygit
         nh
         ripgrep

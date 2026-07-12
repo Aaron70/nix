@@ -32,6 +32,7 @@ in {
       runtimePkgs = with pkgs;
         [
           xwayland-satellite
+          jq
         ]
         ++ config.configurations.packages;
 
@@ -195,7 +196,7 @@ in {
 
           background-effect {
             blur true
-            xray false
+            xray true
           }
         }
 
@@ -217,7 +218,7 @@ in {
           match namespace="^noctalia-backdrop"
           place-within-backdrop true
         }
-        
+
         layer-rule {
           match namespace="^noctalia-(bar-[^\"]+|notification|dock|panel|attached-panel|osd)$"
 
@@ -310,7 +311,7 @@ in {
           Mod+X repeat=false hotkey-overlay-title="Closes the focused window" { close-window; }
           Mod+D hotkey-overlay-title="Run the Application Launcher: ${appLauncher}" { spawn "${appLauncher}"; }
 
-          
+
           XF86AudioRaiseVolume allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.05+ -l 1.0"; } // "-l 1.0" limits the volume to 100%.
           XF86AudioLowerVolume allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.05-"; }
           XF86AudioMute        allow-when-locked=true { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"; }
@@ -391,7 +392,10 @@ in {
 
           Mod+F { maximize-column; }
           Mod+Shift+F { fullscreen-window; }
-          Mod+Ctrl+F { toggle-window-floating; }
+          // Mod+Ctrl+F { toggle-window-floating; }
+          Mod+Ctrl+F {
+              spawn-sh "if [ \"$(niri msg -j focused-window | jq -r .is_floating)\" = \"false\" ]; then niri msg action toggle-window-floating && niri msg action set-window-width -- 60% && niri msg action set-window-height -- 60%; else niri msg action toggle-window-floating; fi"
+          }
           Mod+S { switch-preset-column-width; }
           Mod+C { center-visible-columns; }
 
