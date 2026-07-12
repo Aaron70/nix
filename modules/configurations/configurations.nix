@@ -91,7 +91,7 @@ with lib; {
 
       services.logind.settings.Login = {
         HandleLidSwitch = "poweroff"; # Lid Closed
-        HandleLidSwitchExternalPower = "lock"; # Lid Closed while connected to power
+        HandleLidSwitchExternalPower = "suspend"; # Lid Closed while connected to power
         HandleLidSwitchDocked = "ignore"; # Lic Closed while connected to another screens
       };
       # one of "ignore", "poweroff", "reboot", "halt", "kexec", "suspend", "hibernate", "hybrid-sleep", "suspend-then-hibernate", "lock"
