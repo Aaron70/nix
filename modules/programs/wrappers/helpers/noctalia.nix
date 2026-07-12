@@ -22,7 +22,7 @@ order = [ "default" ]
     capsule_padding = 37.0
     capsule_radius = 8
     capsule_thickness = 0.79999998584389687
-    center = [ "media", "privacy" ]
+    center = [ "media", "privacy", "recorder_2" ]
     end = [ "group:g3", "group:g2", "group:g1", "group:g4" ]
     margin_edge = 5
     margin_ends = 10
@@ -138,7 +138,7 @@ auto_locate = true
 [lockscreen]
 blur_intensity = 0.64999998547136784
 blurred_desktop = true
-tint_intensity = 0.19999999552965164
+tint_intensity = 0.39999999105930328
 
 [lockscreen_widgets]
 enabled = true
@@ -366,6 +366,12 @@ background_opacity = 0.74999998323619366
 position = "top_right"
 position_vertical = "top_right"
 
+[plugin_settings."noctalia/screen_recorder"]
+hide_inactive = true
+quality = "ultra"
+replay_enabled = true
+resolution = "original"
+
 [plugins]
 enabled = [ "noctalia/screen_recorder" ]
 
@@ -479,6 +485,9 @@ active_color = "error"
 hide_inactive = true
 
 [widget.recorder]
+type = "noctalia/screen_recorder:recorder"
+
+[widget.recorder_2]
 type = "noctalia/screen_recorder:recorder"
 
 [widget.workspaces]
