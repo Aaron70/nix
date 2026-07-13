@@ -141,10 +141,17 @@ tint_intensity = 0.19999999552965164
 enabled = true
 schema_version = 2
 widget_order = [
+    "lockscreen-login-box@eDP-1",
+    "lockscreen-login-box@HDMI-A-2",
+    "lockscreen-login-box@DP-3",
+    "lockscreen-login-box@HDMI-A-1",
+    "lockscreen-login-box@DP-1",
     "lockscreen-login-box@winit",
     "lockscreen-login-box@eDP-1",
     "lockscreen-widget-0000000000000006",
-    "lockscreen-widget-0000000000000003"
+    "lockscreen-widget-0000000000000003",
+    "lockscreen-widget-0000000000000007",
+    "lockscreen-widget-0000000000000008"
 ]
 
     [lockscreen_widgets.grid]
@@ -337,6 +344,20 @@ widget_order = [
         layout = "horizontal"
         shadow = false
 
+    [lockscreen_widgets.widget.lockscreen-widget-0000000000000004]
+    box_height = 0.0
+    box_width = 0.0
+    cx = 640.0
+    cy = 538.0
+    output = "eDP-1"
+    rotation = 0.0
+    type = "media_player"
+
+        [lockscreen_widgets.widget.lockscreen-widget-0000000000000004.settings]
+        background = false
+        hide_when_no_media = true
+        shadow = false
+
     [lockscreen_widgets.widget.lockscreen-widget-0000000000000006]
     box_height = 0.0
     box_width = 0.0
@@ -350,6 +371,33 @@ widget_order = [
         background = false
         center_text = true
         clock_style = "digital"
+        shadow = false
+
+    [lockscreen_widgets.widget.lockscreen-widget-0000000000000007]
+    box_height = 0.0
+    box_width = 0.0
+    cx = 960.0
+    cy = 172.5
+    output = "DP-1"
+    rotation = 0.0
+    type = "clock"
+
+        [lockscreen_widgets.widget.lockscreen-widget-0000000000000007.settings]
+        background = false
+        shadow = false
+
+    [lockscreen_widgets.widget.lockscreen-widget-0000000000000008]
+    box_height = 0.0
+    box_width = 0.0
+    cx = 960.0
+    cy = 812.0
+    output = "DP-1"
+    rotation = 0.0
+    type = "media_player"
+
+        [lockscreen_widgets.widget.lockscreen-widget-0000000000000008.settings]
+        background = false
+        hide_when_no_media = true
         shadow = false
 
 [nightlight]
