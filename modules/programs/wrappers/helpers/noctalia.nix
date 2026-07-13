@@ -18,11 +18,12 @@ order = [ "default" ]
 
     [bar.default]
     background_opacity = 0.0
-    capsule_opacity = 0.99999997764825821
-    capsule_padding = 37.0
-    capsule_radius = 8
-    capsule_thickness = 0.79999998584389687
-    center = [ "media", "privacy", "recorder_2" ]
+    capsule = true
+    capsule_opacity = 0.75
+    capsule_padding = 10.0
+    capsule_radius = "auto"
+    capsule_thickness = 0.89999998360872269
+    center = [ "privacy", "media", "recorder_2" ]
     end = [ "group:g3", "group:g2", "group:g1", "group:g4" ]
     margin_edge = 5
     margin_ends = 10
@@ -32,35 +33,31 @@ order = [ "default" ]
 
         [[bar.default.capsule_group]]
         fill = "surface_variant"
-        id = "g1"
-        members = [ "clock", "date" ]
-        opacity = 0.0
-        padding = 6.0
-        radius = 12.0
+        id = "g3"
+        members = [ "network", "bluetooth" ]
+        opacity = 0.75
+        padding = 10.0
 
         [[bar.default.capsule_group]]
         fill = "surface_variant"
         id = "g2"
         members = [ "volume", "brightness", "battery" ]
-        opacity = 0.0
-        padding = 6.0
-        radius = 12.0
-
-        [[bar.default.capsule_group]]
-        fill = "surface_variant"
-        id = "g3"
-        members = [ "network", "bluetooth" ]
-        opacity = 0.0
-        padding = 6.0
-        radius = 12.0
+        opacity = 0.75
+        padding = 10.0
 
         [[bar.default.capsule_group]]
         fill = "surface_variant"
         id = "g4"
         members = [ "notifications", "session" ]
-        opacity = 0.0
-        padding = 6.0
-        radius = 12.0
+        opacity = 0.75
+        padding = 10.0
+
+        [[bar.default.capsule_group]]
+        fill = "surface_variant"
+        id = "g1"
+        members = [ "clock", "date" ]
+        opacity = 0.75
+        padding = 10.0
 
 [battery]
 warning_threshold = 15
@@ -105,7 +102,7 @@ active_monitor_only = true
 active_scale = 1.1000000163912773
 auto_hide = true
 background_opacity = 0.99999997764825821
-enabled = true
+enabled = false
 icon_size = 30
 launcher_icon = "layout-dashboard-filled"
 launcher_position = "start"
@@ -138,18 +135,16 @@ auto_locate = true
 [lockscreen]
 blur_intensity = 0.64999998547136784
 blurred_desktop = true
-tint_intensity = 0.39999999105930328
+tint_intensity = 0.19999999552965164
 
 [lockscreen_widgets]
 enabled = true
 schema_version = 2
 widget_order = [
-    "lockscreen-login-box@HDMI-A-2",
-    "lockscreen-login-box@DP-3",
-    "lockscreen-login-box@HDMI-A-1",
-    "lockscreen-login-box@DP-1",
-    "lockscreen-widget-0000000000000001",
-    "lockscreen-widget-0000000000000002"
+    "lockscreen-login-box@winit",
+    "lockscreen-login-box@eDP-1",
+    "lockscreen-widget-0000000000000006",
+    "lockscreen-widget-0000000000000003"
 ]
 
     [lockscreen_widgets.grid]
@@ -326,10 +321,10 @@ widget_order = [
         shadow = false
 
     [lockscreen_widgets.widget.lockscreen-widget-0000000000000003]
-    box_height = 0.0
-    box_width = 0.0
+    box_height = 128.0
+    box_width = 416.0
     cx = 960.0
-    cy = 792.0
+    cy = 796.0
     output = "eDP-1"
     rotation = 0.0
     type = "media_player"
@@ -440,10 +435,10 @@ telemetry_enabled = true
 
 [theme]
 builtin = "Tokyo-Night"
-community_palette = "Oxocarbon"
+community_palette = "Tokyo Night Storm"
 mode = "dark"
 source = "builtin"
-wallpaper_scheme = "m3-content"
+wallpaper_scheme = "m3-tonal-spot"
 
     [theme.templates]
     community_ids = [ "zen-browser" ]
@@ -453,7 +448,7 @@ directory = "${wallpapersPath}"
 transition_on_startup = true
 
     [wallpaper.automation]
-    enabled = false
+    enabled = true
 
     [wallpaper.default]
     path = "${wallpapersPath}/wallhaven.jpg"
@@ -471,6 +466,8 @@ transition_on_startup = true
     path = "${wallpapersPath}/wallhaven.jpg"
 
 [widget.control-center]
+anchor = true
+capsule = true
 glyph = "brand-dribbble-filled"
 
 [widget.media]
@@ -491,6 +488,7 @@ type = "noctalia/screen_recorder:recorder"
 type = "noctalia/screen_recorder:recorder"
 
 [widget.workspaces]
+anchor = true
 display = "none"
 hide_when_empty = true
 pill_scale = 0.75
