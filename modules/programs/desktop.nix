@@ -28,7 +28,9 @@ in {
     cfg,
     ...
   }: {
-    config = {
+    config = let
+      bar-shell = self.wrappers.${bar}.wrap {inherit pkgs;};
+    in {
       services.gvfs.enable = true;
       services.udisks2.enable = true;
       preferences.programs.terminal.enable = mkDefault true;
@@ -56,6 +58,22 @@ in {
           xdg-desktop-portal-gnome
         ]
         ++ cfg.configurations.packages;
+
+      systemd.services.lock-before-suspend = {
+        enable = true;
+        description = "Locks the session before sleep";
+        wantedBy = [ "sleep.target" ];
+        before = [ "sleep.target" ]; 
+        serviceConfig = {
+          Type = "oneshot";
+          User = "aaronv"; # FIX: use the name of the profile
+          ExecStart = "${pkgs.bash}/bin/bash -c '${getExe bar-shell} msg session lock && sleep 2 && echo \"Session should be locked\"'";
+        };
+        environment = {
+          XDG_RUNTIME_DIR = "/run/user/1000";
+          WAYLAND_DISPLAY="wayland-1";
+        };
+      };
     };
   });
 
