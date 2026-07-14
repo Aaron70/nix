@@ -497,6 +497,7 @@ transition_on_startup = true
 
     [wallpaper.automation]
     enabled = true
+    interval_seconds = 900
 
     [wallpaper.default]
     path = "${wallpapersPath}/wallhaven.jpg"
