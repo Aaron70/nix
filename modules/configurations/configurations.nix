@@ -90,7 +90,7 @@ with lib; {
       services.fprintd.enable = true;
 
       services.logind.settings.Login = {
-        HandleLidSwitch = "poweroff"; # Lid Closed
+        HandleLidSwitch = "suspend"; # Lid Closed
         HandleLidSwitchExternalPower = "suspend"; # Lid Closed while connected to power
         HandleLidSwitchDocked = "ignore"; # Lic Closed while connected to another screens
       };
