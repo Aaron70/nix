@@ -10,6 +10,7 @@ with lib; {
         XCURSOR_SIZE = "25";
       };
       pointerCursor = {
+        enable = true;
         gtk.enable = true;
         x11.enable = true;
         # package = pkgs.bibata-cursors;
