@@ -3,6 +3,7 @@ with lib; {
   flake.nixosModules.configurations = {config, ...}: {
     config = {
       users.users.${config.profile.user.username} = {
+        uid = 1000;
         isNormalUser = true;
         description = config.profile.user.fullname;
         extraGroups = ["networkmanager" "wheel" "audio"];

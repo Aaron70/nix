@@ -26,6 +26,7 @@ in {
   flake.nixosModules.programs = self.lib.mkNixosProgram name ({
     pkgs,
     cfg,
+    config,
     ...
   }: {
     config = let
@@ -62,16 +63,30 @@ in {
       systemd.services.lock-before-suspend = {
         enable = true;
         description = "Locks the session before sleep";
-        wantedBy = [ "sleep.target" ];
-        before = [ "sleep.target" ]; 
+        wantedBy = ["sleep.target"];
+        before = ["sleep.target"];
         serviceConfig = {
           Type = "oneshot";
-          User = "aaronv"; # FIX: use the name of the profile
-          ExecStart = "${pkgs.bash}/bin/bash -c '${getExe bar-shell} msg session lock && sleep 2 && echo \"Session should be locked\"'";
+          User = config.profile.user.username; 
+          ExecStart = pkgs.writeShellScript "lock-screen" ''
+            set -e
+            ${getExe bar-shell} msg session lock
+
+            for i in $(seq 1 20); do
+              locked=$(${getExe bar-shell} msg status | ${getExe pkgs.jq} .locked)
+              if [ "$locked" = "true" ]; then
+                exit 0
+              fi
+              sleep 0.1
+            done
+
+            echo "Timed out waiting for session lock" >&2
+            exit 1
+          '';
         };
         environment = {
-          XDG_RUNTIME_DIR = "/run/user/1000";
-          WAYLAND_DISPLAY="wayland-1";
+          XDG_RUNTIME_DIR = "/run/user/${toString config.users.users.${config.profile.user.username}.uid}";
+          WAYLAND_DISPLAY = "wayland-1";
         };
       };
     };
