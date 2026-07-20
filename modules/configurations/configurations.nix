@@ -92,6 +92,7 @@ with lib; {
       };
 
       security.polkit.enable = true;
+      environment.systemPackages = [pkgs.polkit_gnome];
       services.fprintd.enable = true;
 
       services.logind.settings.Login = {

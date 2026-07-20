@@ -73,6 +73,7 @@ in {
           config.configurations.monitors);
       in ''
         // ==================== | Launch apps | ====================
+        spawn-at-startup "polkit-gnome-authentication-agent-1"
         spawn-at-startup "xwayland-satellite"
         spawn-at-startup "${getExe config.configurations.desktopShell}"
 

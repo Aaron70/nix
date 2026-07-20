@@ -16,14 +16,14 @@
 - [x] Remove the notification about Noctalia plugins
 - [x] Fix the nswitch, ntest, nbuid-vm, nclean and nshell
 - [x] Rewrite Neovim configurations with wrapper?
-- [ ] Install atuin
+- [/] Install atuin
 - [x] Apply the quality of life improvements from [here](https://nixos.wiki/wiki/Jovian_NixOS)
 - [x] Avoid mouse hanging out after a few seconds 
-- [ ] Fix nix packages, can't be executed with `nix run` because of the crypted profiles 
+- [/] Fix nix packages, can't be executed with `nix run` because of the crypted profiles 
 - [x] gx doesn't work for file references, only https links (Neovim)
 - [x] Add an emoji picker (Noctalia already has a emoji picker, open the launcher and write /emo)
 - [x] Add another keyboard lang ES
 - [x] Nixos search packages
-- [ ] Maybe create a MS Teams desktop entry for the web app?
+- [/] Maybe create a MS Teams desktop entry for the web app? ()
 - [x] Open clipboard history with mod+v
 - [ ] Try [Noctalia-greeter](https://github.com/noctalia-dev/noctalia-greeter)
