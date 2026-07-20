@@ -26,4 +26,4 @@
 - [x] Nixos search packages
 - [/] Maybe create a MS Teams desktop entry for the web app? ()
 - [x] Open clipboard history with mod+v
-- [ ] Try [Noctalia-greeter](https://github.com/noctalia-dev/noctalia-greeter)
+- [/] Try [Noctalia-greeter](https://github.com/noctalia-dev/noctalia-greeter)
