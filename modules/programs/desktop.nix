@@ -36,7 +36,7 @@ in {
       services.udisks2.enable = true;
       preferences.programs.terminal.enable = mkDefault true;
       preferences.programs.${bar}.enable = mkDefault true;
-      services.displayManager.gdm.enable = true;
+      services.displayManager.gdm.enable = false;
       programs.${desktop} = {
         enable = true;
         package = self.wrappers.${name}.wrap {

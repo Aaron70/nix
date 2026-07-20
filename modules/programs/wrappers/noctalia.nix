@@ -14,11 +14,32 @@ in {
     };
   });
 
-  flake.nixosModules.programs = self.lib.mkNixosProgram name ({...}: {
+  flake.nixosModules.programs = self.lib.mkNixosProgram name ({pkgs, config, ...}: {
+    imports = [
+      inputs.noctalia-greeter.nixosModules.default
+    ];
     config = {
       environment.variables = {
         __NV_PRIME_RENDER_OFFLOAD = 0;
         __GLX_VENDOR_LIBRARY_NAME = "mesa";
+      };
+
+      programs.noctalia-greeter = {
+        enable = true;
+
+        # Optional configuration
+        greeter-args = "--session ${config.profile.user.username}";
+        settings = {
+          cursor = {
+            # FIX: Make this to follow the cursor configured in ./../../configurations/theme.nix instead of being hardcoded
+            theme = "BreezeX-RosePine-Linux";
+            path = "${pkgs.rose-pine-cursor}/share/icons";
+            size = 24;
+          };
+          keyboard = {
+            layout = "us";
+          };
+        };
       };
     };
   });
