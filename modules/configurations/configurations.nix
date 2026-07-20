@@ -96,6 +96,9 @@ with lib; {
       # environment.systemPackages = [pkgs.polkit_gnome]; NOTE: Using the built-in noctalia polkit-agent
       services.fprintd.enable = true;
 
+      services.gnome.gnome-keyring.enable = true;
+      security.pam.services.greetd.enableGnomeKeyring = true;
+
       services.logind.settings.Login = {
         HandleLidSwitch = "suspend"; # Lid Closed
         HandleLidSwitchExternalPower = "suspend"; # Lid Closed while connected to power

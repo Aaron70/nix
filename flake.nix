@@ -22,8 +22,7 @@
     zen-browser.url = "github:youwen5/zen-browser-flake";
     zen-browser.inputs.nixpkgs.follows = "nixpkgs";
 
-    # TODO: Point to master once the issue is fixed: https://github.com/noctalia-dev/noctalia-shell/issues/2463
-    noctalia.url = "github:noctalia-dev/noctalia-shell/v5.0.0-beta1";
+    noctalia.url = "github:noctalia-dev/noctalia-shell";
     noctalia.inputs.nixpkgs.follows = "nixpkgs";
 
     jovian.url = "github:Jovian-Experiments/Jovian-NixOS";

@@ -6,8 +6,6 @@
       imagessPath = "${self.lib.resourcesPath}/images";
     in
     ''
-config_version = 2
-
 [audio]
 enable_sounds = true
 
@@ -69,6 +67,7 @@ warning_threshold = 15
     warning_threshold = 30
 
 [brightness]
+enable_ddcutil = true
 sync_all_monitors = true
 
 [calendar]
@@ -116,11 +115,12 @@ shadow = false
 
 [idle]
 behavior_order = [ "lock", "screen-off", "lock-and-suspend" ]
+pre_action_fade_seconds = 10
 
     [idle.behavior.lock]
     action = "lock"
     enabled = true
-    timeout = 600.0
+    timeout = 610.0
 
     [idle.behavior.lock-and-suspend]
     action = "lock_and_suspend"
@@ -130,7 +130,7 @@ behavior_order = [ "lock", "screen-off", "lock-and-suspend" ]
     [idle.behavior.screen-off]
     action = "screen_off"
     enabled = true
-    timeout = 660.0
+    timeout = 600.0
 
 [location]
 auto_locate = true
@@ -413,13 +413,28 @@ position = "top_right"
 position_vertical = "top_right"
 
 [plugin_settings."noctalia/screen_recorder"]
+color_range = "full"
 hide_inactive = true
 quality = "ultra"
 replay_enabled = true
 resolution = "original"
 
+[plugin_settings."yocraft/web-launcher"]
+icon_provider = "direct"
+links = [
+    "GitHub|https://github.com",
+    "GitLab|https://gitlab.com",
+    "Codeberg|https://codeberg.org",
+    "Reddit|https://reddit.com",
+    "YouTube|https://youtube.com",
+    "Gmail|https://mail.google.com",
+    "Whatsapp|https://web.whatsapp.com",
+    "Teams|https://teams.live.com/v2"
+]
+notify = false
+
 [plugins]
-enabled = [ "noctalia/screen_recorder" ]
+enabled = [ "noctalia/screen_recorder", "yocraft/web-launcher", "apex077/eyecare" ]
 
 [shell]
 avatar_path = "${imagessPath}/avatar.jpg"
@@ -446,6 +461,7 @@ telemetry_enabled = true
 
     [shell.panel]
     control_center_placement = "floating"
+    list_item_background = true
     open_near_click_control_center = true
     open_near_click_session = true
     session_placement = "floating"
@@ -497,6 +513,7 @@ telemetry_enabled = true
 builtin = "Tokyo-Night"
 community_palette = "Tokyo Night Storm"
 mode = "dark"
+pure_black_dark = true
 source = "builtin"
 wallpaper_scheme = "m3-tonal-spot"
 

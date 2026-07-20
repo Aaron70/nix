@@ -9,7 +9,7 @@ in {
     modules = [self.nixosModules.${host}];
   };
 
-  flake.nixosModules.${host} = {...}: {
+  flake.nixosModules.${host} = {pkgs, ...}: {
     imports = [
       self.nixosModules.configurations
       self.nixosModules."${host}-hardware"
@@ -70,6 +70,16 @@ in {
             };
           };
         };
+      };
+
+      hardware.graphics = {
+        enable = true;
+        extraPackages = with pkgs; [
+          # intel-media-driver # for newer Intel iGPUs (Broadwell+)
+          intel-vaapi-driver # for older Intel iGPUs
+          libva-vdpau-driver
+          libvdpau-va-gl
+        ];
       };
     };
   };

@@ -62,6 +62,7 @@ in {
             query=$(echo "" | ${getExe bar-shell} dmenu -p "Search nixpkgs: ")
             [ -n "$query" ] && ${pkgs.xdg-utils}/bin/xdg-open "https://search.nixos.org/packages?query=''${query// /+}"
           '')
+          ddcutil
         ]
         ++ cfg.configurations.packages;
 

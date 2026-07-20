@@ -37,7 +37,12 @@ in {
 
     config = {
       package = inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default;
-      runtimePkgs = [ ];
+      runtimePkgs = with pkgs; [
+        # Dependencies for https://noctalia.dev/plugins/official/screen_recorder
+        gpu-screen-recorder
+        xdg-desktop-portal
+        xdg-desktop-portal-gnome
+      ];
     };
   };
 }
