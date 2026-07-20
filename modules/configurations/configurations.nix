@@ -83,7 +83,12 @@ with lib; {
 
       services.xserver.xkb = {
         layout = "us";
-        variant = "altgr-intl";
+        variant = "";
+        options = "compose:ralt";
+      };
+      environment.variables = {
+        GTK_IM_MODULE = "xim";
+        QT_IM_MODULE = "xim";
       };
 
       security.polkit.enable = true;

@@ -115,7 +115,8 @@ in {
           keyboard {
             xkb {
               layout "us"
-              variant "altgr-intl"
+              variant ""
+              options "compose:ralt"
             }
             numlock
           }
