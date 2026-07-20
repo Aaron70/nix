@@ -57,6 +57,7 @@ in {
           mission-center
           wdisplays
           xdg-desktop-portal-gnome
+          (pkgs.writeShellScriptBin "clipboard-history" "${getExe bar-shell} msg panel-toggle clipboard")
         ]
         ++ cfg.configurations.packages;
 

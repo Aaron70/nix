@@ -349,6 +349,7 @@ in {
           Mod+Space repeat=false hotkey-overlay-title="Open a Terminal" { spawn "${terminal}"; }
           Mod+X repeat=false hotkey-overlay-title="Closes the focused window" { close-window; }
           Mod+D hotkey-overlay-title="Run the Application Launcher: ${appLauncher}" { spawn "${appLauncher}"; }
+          Mod+V hotkey-overlay-title="Open the clipboard history app" { spawn "clipboard-history"; }
 
 
           XF86AudioRaiseVolume allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.05+ -l 1.0"; } // "-l 1.0" limits the volume to 100%.
