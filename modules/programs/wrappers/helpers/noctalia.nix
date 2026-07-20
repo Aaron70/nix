@@ -434,6 +434,13 @@ telemetry_enabled = true
     compact = true
     session_search = true
 
+    [shell.launcher.dmenu.entry.nixpkgs]
+    command = "echo Nixpkgs"                                                              # no candidates, so typed text falls through
+    exec    = "nixpkgs-search"
+    prefix  = "nix"                                                               # trigger word -> "/nix"
+    glyph   = "package"                                                           # optional Tabler glyph, adjust to whatever exists
+    global  = false
+
     [shell.panel]
     control_center_placement = "floating"
     open_near_click_control_center = true

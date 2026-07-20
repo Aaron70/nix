@@ -58,6 +58,10 @@ in {
           wdisplays
           xdg-desktop-portal-gnome
           (pkgs.writeShellScriptBin "clipboard-history" "${getExe bar-shell} msg panel-toggle clipboard")
+          (pkgs.writeShellScriptBin "nixpkgs-search" ''
+            query=$(echo "" | ${getExe bar-shell} dmenu -p "Search nixpkgs: ")
+            [ -n "$query" ] && ${pkgs.xdg-utils}/bin/xdg-open "https://search.nixos.org/packages?query=''${query// /+}"
+          '')
         ]
         ++ cfg.configurations.packages;
 
@@ -68,7 +72,7 @@ in {
         before = ["sleep.target"];
         serviceConfig = {
           Type = "oneshot";
-          User = config.profile.user.username; 
+          User = config.profile.user.username;
           ExecStart = pkgs.writeShellScript "lock-screen" ''
             set -e
             ${getExe bar-shell} msg session lock
