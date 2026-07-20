@@ -1,23 +1,29 @@
-[] Gargabe Collection service
-  [] Run nh clean periodically
-  [] Works for Nixos, Darwin and HomeManager
-[*] Cursor Theme (Seems like it needs HomeManager, I don't know if its worth it)
-[] Darwing Configurations
-[] HomeManager Configurations
-[*] HomeManager Modules
-[*] Development Feature
-  [*] Programming languages: Go, Java, Javascript, Rust and Python
-  [*] Docker
-[*] Feature Gaming
-  [*] Games and launchers
-  [*] Discord
-  [*] Jovian for GPD
-[*] Fix the color on oh-my-posh prompt when there is a pending pull or push on a repository
-[*] Remove the notification about Noctalia plugins
-[*] Fix the nswitch, ntest, nbuid-vm, nclean and nshell
-[*] Rewrite Neovim configurations with wrapper?
-[] Install atuin
-[*] Apply the quality of life improvements from [here](https://nixos.wiki/wiki/Jovian_NixOS)
-[*] Avoid mouse hanging out after a few seconds 
-[] Fix nix packages, can't be executed with `nix run` because of the crypted profiles 
-[] gx doesn't work for file references, only https links (Neovim)
+- [x] Gargabe Collection service
+    - [x] Run nh clean periodically
+    - [x] Works for Nixos, Darwin and HomeManager
+- [x] Cursor Theme (Seems like it needs HomeManager, I don't know if its worth it)
+- [x] Darwing Configurations
+- [x] HomeManager Configurations
+- [x] HomeManager Modules
+- [x] Development Feature
+    - [x] Programming languages: Go, Java, Javascript, Rust and Python
+    - [x] Docker
+- [x] Feature Gaming
+    - [x] Games and launchers
+    - [x] Discord
+    - [x] Jovian for GPD
+- [x] Fix the color on oh-my-posh prompt when there is a pending pull or push on a repository
+- [x] Remove the notification about Noctalia plugins
+- [x] Fix the nswitch, ntest, nbuid-vm, nclean and nshell
+- [x] Rewrite Neovim configurations with wrapper?
+- [ ] Install atuin
+- [x] Apply the quality of life improvements from [here](https://nixos.wiki/wiki/Jovian_NixOS)
+- [x] Avoid mouse hanging out after a few seconds 
+- [ ] Fix nix packages, can't be executed with `nix run` because of the crypted profiles 
+- [x] gx doesn't work for file references, only https links (Neovim)
+- [x] Add an emoji picker (Noctalia already has a emoji picker, open the launcher and write /emo)
+- [x] Add another keyboard lang ES
+- [x] Nixos search packages
+- [ ] Maybe create a MS Teams desktop entry for the web app?
+- [x] Open clipboard history with mod+v
+- [ ] Try [Noctalia-greeter](https://github.com/noctalia-dev/noctalia-greeter)
