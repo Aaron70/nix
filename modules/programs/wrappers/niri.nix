@@ -251,6 +251,14 @@ in {
             default-floating-position x=10 y=10 relative-to="bottom-right"
         }
 
+        // Steam games on fullscreen
+        window-rule {
+            match app-id=r#"^steam_app_.*$"#
+
+            open-fullscreen true
+            open-on-workspace "gaming"
+        }
+
 
 
         // ==================== | Layer Rules | ====================
